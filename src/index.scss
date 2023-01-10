@@ -33,9 +33,18 @@
 	width: 100px;
 	height: 100px;
 	overflow: auto;
-	&__title{
+	&__top {
 		display: flex;
 		justify-content: space-between;
 		padding: 2px 4px;
 	}
+}
+// flex center center
+.fcc{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.mb{
+	margin-bottom: 15px;
 }
