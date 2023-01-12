@@ -1,9 +1,8 @@
 import React, { PureComponent } from "react"
 import DayItem from "./DayItem"
-import openDayOptions from "../img/star.svg"
-import closeDayOptions from "../img/close.svg"
 import Toggler from "./Toggler"
 import InputsAndColors from "./InputsAndColors"
+import Icon from "./Icon"
 
 export default class Day extends PureComponent {
 
@@ -26,7 +25,7 @@ export default class Day extends PureComponent {
 					<Toggler defaultState={false}>
 						{(on, toggle) => (
 							<>
-								<img className="zi3" src={on ? closeDayOptions : openDayOptions} onClick={toggle} />
+								<Icon src={on ? "closeDayOptions" : "openDayOptions"} onClick={toggle} className="zi3" />
 
 								{on &&
 									<div className="Day__options zi2">

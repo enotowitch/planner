@@ -149,9 +149,17 @@
 .mb{
 	margin-bottom: 15px;
 }
+.mt{
+	margin-top: 15px;
+}
 .zi2{
 	z-index: 2;
 }
 .zi3{
 	z-index: 3;
+}
+.c{
+	position: relative;
+	left: 50%;
+	transform: translate(-50%)
 }

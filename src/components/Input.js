@@ -23,8 +23,8 @@ export default class Input extends PureComponent {
 		}
 
 		if (type === "text") {
-			const withoutDeletedColor = colors.filter(colorObj => colorObj.colorName !== name)
-			const newColors = [...withoutDeletedColor, { id: id, colorName: value, color: color }]
+			const withoutDeletedColor = colors.filter(colorObj => colorObj.colorName !== name && colorObj.colorName) // delete prev colorName and void colorName
+			const newColors = [...withoutDeletedColor, { id: Number(id), colorName: value, color: color }]
 			sort(newColors)
 			saveChanges(newColors, this.context)
 		}

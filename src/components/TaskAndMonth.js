@@ -3,6 +3,7 @@ import Month from "./Month"
 import prev from "../img/prev.svg"
 import next from "../img/next.svg"
 import { Context } from "../context"
+import Icon from "./Icon"
 
 export default class TaskAndMonth extends PureComponent {
 
@@ -26,9 +27,9 @@ export default class TaskAndMonth extends PureComponent {
 				{taskAndMonthOn &&
 					<>
 						<div className="fcc mb">
-							<img src={prev} onClick={() => this.setState(prev => ({ taskNum: prev.taskNum - 1 }))} />
+							<Icon src="prev" onClick={() => this.setState(prev => ({ taskNum: prev.taskNum - 1 }))} />
 							{taskName}
-							<img src={next} onClick={() => this.setState(prev => ({ taskNum: prev.taskNum + 1 }))} />
+							<Icon src="next" onClick={() => this.setState(prev => ({ taskNum: prev.taskNum + 1 }))} />
 						</div>
 
 						<Month monthNum={monthNum} task={task} taskName={taskName} />
