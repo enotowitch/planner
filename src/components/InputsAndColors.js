@@ -8,8 +8,10 @@ export default class InputsAndColors extends PureComponent {
 
 	render() {
 
+		const { disabled } = this.props
 		const { colors } = this.context // [{…}, {…}]
-		const inputAndColor = colors.map(color => <InputAndColor colorName={String(Object.keys(color))} color={String(Object.values(color))} disabled={this.props.disabled} />)
+
+		const inputAndColor = colors && colors.map(colorObj => <InputAndColor id={colorObj.id} colorName={colorObj.colorName} color={colorObj.color} disabled={disabled} />)
 
 
 		return (

@@ -3,17 +3,21 @@ import Burger from "./components/Burger";
 import Menu from "./components/Menu";
 import TaskAndMonth from "./components/TaskAndMonth";
 import { Context } from "./context"
+import lsColors from "./lsColors"
 
 class App extends PureComponent {
 
 	state = {
 		taskAndMonthOn: true,
 		menuOn: false,
-		colors: eval(localStorage.getItem("colors")),
+		colors: lsColors,
 		tasks: eval(localStorage.getItem("tasks"))
 	}
 
+	setStateColors = (arr) => this.setState({ colors: arr })
 
+
+	// ! RENDER
 	render() {
 
 		// ! DEFAULT
@@ -21,11 +25,11 @@ class App extends PureComponent {
 		if (localStorage.length === 0) {
 			localStorage.setItem("colors",
 				`[
-			{ success: "#87d20c"},
-			{ "so-so": "#ffd561"},
-			{ fail: "#ff8c92"},
-			{ rest: "#ff7fff"},
-			]`)
+					{ id: 0, colorName: "success", color: "#87d20c"},
+					{ id: 1, colorName: "so-so", color: "#ffd561"},
+					{ id: 2, colorName: "fail", color: "#ff8c92"},
+					{ id: 3, colorName: "rest", color: "#ff7fff"},
+				]`)
 		}
 		// ? colors
 		// ! tasks
@@ -47,10 +51,11 @@ class App extends PureComponent {
 		// ? tasks
 		// ? DEFAULT
 
+		const { setStateColors } = this
 
 		// ! RETURN
 		return (
-			<Context.Provider value={{ ...this.state }}>
+			<Context.Provider value={{ ...this.state, setStateColors }}>
 
 				<div onClick={() => this.setState(prev => ({ taskAndMonthOn: !prev.taskAndMonthOn, menuOn: !prev.menuOn }))}>
 					<Burger />
