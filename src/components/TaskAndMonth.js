@@ -1,19 +1,23 @@
 import React, { PureComponent } from "react"
 import Month from "./Month"
-import prev from "../img/prev.svg"
-import next from "../img/next.svg"
 import { Context } from "../context"
-import Icon from "./Icon"
+import TaskToggler from "./TogglerPrevNext"
+import MonthToggler from "./TogglerPrevNext"
 
 export default class TaskAndMonth extends PureComponent {
+
+	static contextType = Context
 
 	state = {
 		taskNum: 0,
 		monthNum: 0
 	}
 
-	static contextType = Context
+	prevFn = (stateName) => this.setState(prev => ({ [stateName]: prev[stateName] - 1 }))
+	nextFn = (stateName) => this.setState(prev => ({ [stateName]: prev[stateName] + 1 }))
 
+
+	// ! RENDER
 	render() {
 
 		const { tasks, taskAndMonthOn } = this.context // tasks = [{…}, {…}]
@@ -22,15 +26,18 @@ export default class TaskAndMonth extends PureComponent {
 		const taskName = String(Object.keys(tasks[taskNum])) // learn || exersize
 		const task = tasks[taskNum] // {learn: {…}} || {exersize: {…}}
 
+		let monthName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+		monthName = monthName[monthNum]
+
+		const { prevFn, nextFn } = this
+
 		return (
 			<>
 				{taskAndMonthOn &&
 					<>
-						<div className="fcc mb">
-							<Icon src="prev" onClick={() => this.setState(prev => ({ taskNum: prev.taskNum - 1 }))} />
-							{taskName}
-							<Icon src="next" onClick={() => this.setState(prev => ({ taskNum: prev.taskNum + 1 }))} />
-						</div>
+						<MonthToggler title={`${monthName}, 2023`} prevFn={() => prevFn("monthNum")} nextFn={() => nextFn("monthNum")} />
+
+						<TaskToggler title={taskName} prevFn={() => prevFn("taskNum")} nextFn={() => nextFn("taskNum")} />
 
 						<Month monthNum={monthNum} task={task} taskName={taskName} />
 					</>
