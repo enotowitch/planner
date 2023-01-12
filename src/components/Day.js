@@ -25,7 +25,7 @@ export default class Day extends PureComponent {
 					<Toggler defaultState={false}>
 						{(on, toggle) => (
 							<>
-								<Icon src={on ? "closeDayOptions" : "openDayOptions"} onClick={toggle} className="zi3" />
+								<Icon src={on ? "close" : "open"} onClick={toggle} className="zi3" />
 
 								{on &&
 									<div className="Day__options zi2">

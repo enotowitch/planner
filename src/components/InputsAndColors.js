@@ -15,9 +15,9 @@ export default class InputsAndColors extends PureComponent {
 
 
 		return (
-			<>
+			<div className="InputsAndColors">
 				{inputAndColor}
-			</>
+			</div>
 		)
 	}
 }

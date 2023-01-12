@@ -22,8 +22,11 @@
 .Input{
 	border: none;
 	border-bottom: 1px solid black;
-	width: 50%;
+	width: 75%;
 	background: transparent;
+	&_color{
+		width: 25%;
+	}
 }
 .DayItem{
 	border-bottom: 2px solid gray;
@@ -47,7 +50,13 @@
 		position: absolute;
 		background: gray;
 		padding-top: 15px;
+		min-height: 100%;
 	}
+}
+.InputsAndColors{
+	max-width: 400px;
+	margin: 0 auto;
+	padding: 0 15px;
 }
 
 // ! BURGER
@@ -146,11 +155,17 @@
 	align-items: center;
 	justify-content: center;
 }
+.mt{
+	margin-top: 15px;
+}
+.mr{
+	margin-right: 15px;
+}
 .mb{
 	margin-bottom: 15px;
 }
-.mt{
-	margin-top: 15px;
+.ml{
+	margin-left: 15px;
 }
 .zi2{
 	z-index: 2;
@@ -162,4 +177,7 @@
 	position: relative;
 	left: 50%;
 	transform: translate(-50%)
+}
+.f{
+	display: flex;
 }
