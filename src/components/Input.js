@@ -2,6 +2,7 @@ import React, { PureComponent } from "react"
 import InputState from "./InputState"
 import { Context } from "../context"
 import sort from "../functions/sort"
+import save from "../functions/save"
 
 
 export default class Input extends PureComponent {
@@ -17,21 +18,20 @@ export default class Input extends PureComponent {
 		const { colors } = this.context
 		const { color, colorName } = this.props
 
-		function saveChanges(newColors, context) {
-			localStorage.setItem("colors", JSON.stringify(newColors))
-			context.setStateColors(newColors)
-		}
-
+		// ! text
 		if (type === "text") {
 			const withoutDeletedColor = colors.filter(colorObj => colorObj.colorName !== name && colorObj.colorName) // delete prev colorName and void colorName
 			const newColors = [...withoutDeletedColor, { id: Number(id), colorName: value, color: color }]
 			sort(newColors)
-			saveChanges(newColors, this.context)
+			save("colors", newColors, this.context.setStateColors)
 		}
+		// ? text
+		// ! color
 		if (type === "color") {
 			const newColors = colors.map(colorObj => colorObj.colorName === colorName ? { ...colorObj, "color": value } : colorObj)
-			saveChanges(newColors, this.context)
+			save("colors", newColors, this.context.setStateColors)
 		}
+		// ? color
 	}
 
 

@@ -4,6 +4,7 @@ import Menu from "./components/Menu";
 import TaskAndMonth from "./components/TaskAndMonth";
 import { Context } from "./context"
 import lsColors from "./lsColors"
+import save from "./functions/save"
 
 class App extends PureComponent {
 
@@ -23,35 +24,38 @@ class App extends PureComponent {
 		// ! DEFAULT
 		// ! colors
 		if (localStorage.length === 0) {
-			localStorage.setItem("colors",
-				`[
-					{ id: 0, colorName: "success", color: "#87d20c"},
-					{ id: 1, colorName: "so-so", color: "#ffd561"},
-					{ id: 2, colorName: "fail", color: "#ff8c92"},
-					{ id: 3, colorName: "rest", color: "#ff7fff"},
-				]`)
+			save("colors",
+				[
+					{ id: 0, colorName: "success", color: "#87d20c" },
+					{ id: 1, colorName: "so-so", color: "#ffd561" },
+					{ id: 2, colorName: "fail", color: "#ff8c92" },
+					{ id: 3, colorName: "rest", color: "#ff7fff" },
+				])
 		}
 		// ? colors
 		// ! tasks
-		localStorage.setItem("tasks",
-			`[
-			{ exersize: 
-				[
-					{subTask: "pull ups", weekDay: ["tue", "sat", "sun"], type: "input"}, 
-					{subTask: "push ups", weekDay: ["wed", "mon", "sun"], type: "input"}
-				]
+		save("tasks",
+			[
+				{
+					exersize:
+						[
+							{ subTask: "pull ups", weekDay: ["tue", "sat", "sun"], type: "input" },
+							{ subTask: "push ups", weekDay: ["wed", "mon", "sun"], type: "input" }
+						]
 				},
-			{ learn: 
-				[
-					{subTask: "js", weekDay: ["mon", "tue", "wed"], type: "checkbox"}, 
-					{subTask: "react", weekDay: ["thu", "fri", "sat"], type: "checkbox"}
-				]
+				{
+					learn:
+						[
+							{ subTask: "js", weekDay: ["mon", "tue", "wed"], type: "checkbox" },
+							{ subTask: "react", weekDay: ["thu", "fri", "sat"], type: "checkbox" }
+						]
 				}
-		]`)
+			])
 		// ? tasks
 		// ? DEFAULT
 
 		const { setStateColors } = this
+
 
 		// ! RETURN
 		return (
@@ -62,6 +66,7 @@ class App extends PureComponent {
 				</div >
 
 				<TaskAndMonth />
+				
 				<Menu />
 			</Context.Provider >
 		);

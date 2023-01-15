@@ -2,6 +2,7 @@ import React, { PureComponent } from "react"
 import Icon from "./Icon"
 import Input from "./Input"
 import { Context } from "../context"
+import save from "../functions/save"
 
 export default class InputAndColor extends PureComponent {
 
@@ -13,8 +14,7 @@ export default class InputAndColor extends PureComponent {
 		const toDelete = e.target.closest("div").querySelector(`[type="text"]`).value
 		const deleted = colors.filter(colorObj => colorObj.colorName !== toDelete)
 
-		localStorage.setItem("colors", JSON.stringify(deleted))
-		setStateColors(deleted)
+		save("colors", deleted, setStateColors)
 	}
 
 	render() {

@@ -2,6 +2,7 @@ import React, { PureComponent } from "react"
 import InputsAndColors from "./InputsAndColors"
 import { Context } from "../context"
 import Icon from "./Icon"
+import save from "../functions/save"
 
 export default class Menu extends PureComponent {
 
@@ -12,13 +13,13 @@ export default class Menu extends PureComponent {
 
 		const lastId = Number(colors[colors.length - 1].id)
 
-		localStorage.setItem("colors", JSON.stringify([...colors, { id: lastId + 1, colorName: "", color: "#ffffff" }]))
-		setStateColors([...colors, { id: lastId + 1, colorName: "", color: "#ffffff" }])
+		save("colors", [...colors, { id: lastId + 1, colorName: "", color: "#ffffff" }], setStateColors)
 	}
 
 	render() {
 
 		const { menuOn } = this.context
+		const { addColor } = this
 
 		return (
 			<>
@@ -28,7 +29,7 @@ export default class Menu extends PureComponent {
 							<InputsAndColors />
 						</div>
 
-						<Icon src="add" onClick={this.addColor} className="c mt" />
+						<Icon src="add" onClick={addColor} className="c mt" />
 					</>
 				}
 
