@@ -3,21 +3,44 @@ import DayItem from "./DayItem"
 import Toggler from "./Toggler"
 import InputsAndColors from "./InputsAndColors"
 import Icon from "./Icon"
+import getDayProp from "../functions/getDayProp"
 
 export default class Day extends PureComponent {
 
+	// ! state
+	state = {
+		dayColor: getDayProp(this.props.day, "color")
+	}
+
+	setStateDayColor = (newColor) => this.setState({ dayColor: newColor })
+	// ? state
+
 	getWeekDay = (date) => new Date(`${date}, 2023`).toLocaleTimeString("en-us", { weekday: 'short' }).match(/.*?\s/)[0].toLowerCase().trim()
 
+	componentDidUpdate(prevProps) {
+		if (prevProps.day !== this.props.day) {
+			this.setStateDayColor(getDayProp(this.props.day, "color"))
+		}
+	}
+
+
+	// ! RENDER
 	render() {
 
-		const weekDay = this.getWeekDay(this.props.day) // sun, mon, tue, ...
+		const { day, subTasks } = this.props
+		const { dayColor } = this.state
+		const { getWeekDay, setStateDayColor } = this
 
-		const dayItems = this.props.subTasks.map(subTaskObj => subTaskObj.weekDay.includes(weekDay) && <DayItem subTaskName={subTaskObj.subTask} type={subTaskObj.type} />)
+		// ! weekDay,dayItems,dayNum
+		const weekDay = getWeekDay(day) // sun, mon, tue, ...	
+		const dayItems = subTasks.map(subTaskObj => subTaskObj.weekDay.includes(weekDay) && <DayItem subTaskName={subTaskObj.subTask} type={subTaskObj.type} />)
+		const dayNum = day.match(/\d+/)
+		// ? weekDay,dayItems,dayNum
 
-		const dayNum = this.props.day.match(/\d+/)
 
+		// ! RETURN
 		return (
-			<div className="Day">
+			<div className="Day" style={{ background: dayColor }}>
 				<div className="Day__top">
 					<span>{dayNum}</span>
 					<span>{weekDay}</span>
@@ -29,7 +52,7 @@ export default class Day extends PureComponent {
 
 								{on &&
 									<div className="Day__options zi2">
-										<InputsAndColors disabled={true} />
+										<InputsAndColors disabled={true} day={day} setStateDayColor={setStateDayColor} />
 									</div>
 								}
 							</>

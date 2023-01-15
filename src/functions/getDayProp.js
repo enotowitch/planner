@@ -1,0 +1,1 @@
+export default (day, prop) => localStorage.getItem(day) && JSON.parse(localStorage.getItem(day))[prop]

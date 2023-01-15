@@ -23,13 +23,13 @@ export default class Input extends PureComponent {
 			const withoutDeletedColor = colors.filter(colorObj => colorObj.colorName !== name && colorObj.colorName) // delete prev colorName and void colorName
 			const newColors = [...withoutDeletedColor, { id: Number(id), colorName: value, color: color }]
 			sort(newColors)
-			save("colors", newColors, this.context.setStateColors)
+			save("colors", newColors, this.context.setAppState)
 		}
 		// ? text
 		// ! color
 		if (type === "color") {
 			const newColors = colors.map(colorObj => colorObj.colorName === colorName ? { ...colorObj, "color": value } : colorObj)
-			save("colors", newColors, this.context.setStateColors)
+			save("colors", newColors, this.context.setAppState)
 		}
 		// ? color
 	}

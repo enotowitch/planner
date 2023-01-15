@@ -9,11 +9,11 @@ export default class Menu extends PureComponent {
 	static contextType = Context
 
 	addColor = () => {
-		const { colors, setStateColors } = this.context
+		const { colors, setAppState } = this.context
 
 		const lastId = Number(colors[colors.length - 1].id)
 
-		save("colors", [...colors, { id: lastId + 1, colorName: "", color: "#ffffff" }], setStateColors)
+		save("colors", [...colors, { id: lastId + 1, colorName: "", color: "#ffffff" }], setAppState)
 	}
 
 	render() {

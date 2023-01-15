@@ -9,20 +9,29 @@ export default class InputAndColor extends PureComponent {
 	static contextType = Context
 
 	deleteColor = (e) => {
-		const { colors, setStateColors } = this.context
+		const { colors, setAppState } = this.context
 
 		const toDelete = e.target.closest("div").querySelector(`[type="text"]`).value
 		const deleted = colors.filter(colorObj => colorObj.colorName !== toDelete)
 
-		save("colors", deleted, setStateColors)
+		save("colors", deleted, setAppState)
 	}
 
+	writeDay = () => {
+		const { day, colorName, color, setStateDayColor } = this.props
+		save(day, { day, colorName, color })
+		setStateDayColor(color)
+	}
+
+	// ! RENDER
 	render() {
 
 		const { id, colorName, color, disabled } = this.props
+		const { writeDay } = this
 
 		return (
-			<div className="f">
+			// disabled means that it's in "dayOptions", so user wants to color this day
+			<div className="f" onClick={disabled && writeDay}>
 				<Input type="text" id={id} colorName={colorName} color={color} className="Input" disabled={disabled} />
 				<Input type="color" id={id} colorName={colorName} color={color} className="Input_color" disabled={disabled} />
 				{/* can delete only in Menu */}
