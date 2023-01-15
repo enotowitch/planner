@@ -3,13 +3,18 @@ import DayItem from "./DayItem"
 import Toggler from "./Toggler"
 import InputsAndColors from "./InputsAndColors"
 import Icon from "./Icon"
-import getDayProp from "../functions/getDayProp"
+import getDay from "../functions/getDay"
+import { Context } from "../context"
 
 export default class Day extends PureComponent {
 
+	static contextType = Context
+
+	getColorDayAndTask = () => getDay(this.props.day, this.context.curTaskName)
+	
 	// ! state
 	state = {
-		dayColor: getDayProp(this.props.day, "color")
+		dayColor: this.getColorDayAndTask()
 	}
 
 	setStateDayColor = (newColor) => this.setState({ dayColor: newColor })
@@ -17,11 +22,19 @@ export default class Day extends PureComponent {
 
 	getWeekDay = (date) => new Date(`${date}, 2023`).toLocaleTimeString("en-us", { weekday: 'short' }).match(/.*?\s/)[0].toLowerCase().trim()
 
+	// ! componentDidUpdate
 	componentDidUpdate(prevProps) {
+
+		const { setStateDayColor, getColorDayAndTask } = this
+
 		if (prevProps.day !== this.props.day) {
-			this.setStateDayColor(getDayProp(this.props.day, "color"))
+			setStateDayColor(getColorDayAndTask())
+		}
+		if (prevProps.taskName !== this.context.curTaskName) {
+			setStateDayColor(getColorDayAndTask())
 		}
 	}
+	// ? componentDidUpdate
 
 
 	// ! RENDER

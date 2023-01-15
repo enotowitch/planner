@@ -8,6 +8,7 @@ import save from "./functions/save"
 
 class App extends PureComponent {
 
+	// ! state
 	state = {
 		taskAndMonthOn: true,
 		menuOn: false,
@@ -18,6 +19,7 @@ class App extends PureComponent {
 	}
 
 	setAppState = (stateName, newValue) => this.setState({ [stateName]: newValue })
+	// ? state
 
 
 	// ! RENDER
@@ -57,11 +59,14 @@ class App extends PureComponent {
 		// ? DEFAULT
 
 		const { setAppState } = this
+		const { tasks, taskNum } = this.state
+
+		const curTaskName = String(Object.keys(tasks[taskNum]))
 
 
 		// ! RETURN
 		return (
-			<Context.Provider value={{ ...this.state, setAppState }}>
+			<Context.Provider value={{ ...this.state, setAppState, curTaskName }}>
 
 				<div onClick={() => this.setState(prev => ({ taskAndMonthOn: !prev.taskAndMonthOn, menuOn: !prev.menuOn }))}>
 					<Burger />

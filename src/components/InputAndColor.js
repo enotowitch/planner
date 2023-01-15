@@ -3,6 +3,7 @@ import Icon from "./Icon"
 import Input from "./Input"
 import { Context } from "../context"
 import save from "../functions/save"
+import getDay from "../functions/getDay"
 
 export default class InputAndColor extends PureComponent {
 
@@ -18,8 +19,12 @@ export default class InputAndColor extends PureComponent {
 	}
 
 	writeDay = () => {
-		const { day, colorName, color, setStateDayColor } = this.props
-		save(day, { day, colorName, color })
+		const { day, color, setStateDayColor } = this.props
+		const { curTaskName } = this.context
+
+		const oldDay = getDay(day) // e.g { "day": "Jan 12", "exersize": "#ffd561" }
+
+		save(day, { ...oldDay, day, [curTaskName]: color }) // e.g { "day": "Jan 12", "exersize": "#ffd561", "learn": "#008015"}
 		setStateDayColor(color)
 	}
 

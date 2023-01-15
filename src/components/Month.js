@@ -8,7 +8,7 @@ export default class Month extends PureComponent {
 
 		const { monthNum, task, taskName } = this.props
 
-		const days = listOfMonths[monthNum].map(egJan9 => <Day day={egJan9} subTasks={task[taskName]} />)
+		const days = listOfMonths[monthNum].map(egJan9 => <Day day={egJan9} subTasks={task[taskName]} taskName={taskName} />)
 
 		return (
 			<>
