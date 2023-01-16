@@ -37,8 +37,8 @@ export default class InputAndColor extends PureComponent {
 		return (
 			// disabled means that it's in "dayOptions", so user wants to color this day
 			<div className="f" onClick={disabled && writeDay}>
-				<Input type="text" id={id} colorName={colorName} color={color} className="Input" disabled={disabled} />
-				<Input type="color" id={id} colorName={colorName} color={color} className="Input_color" disabled={disabled} />
+				<Input role="color" type="text" id={id} colorName={colorName} color={color} className="Input" disabled={disabled} />
+				<Input role="color" type="color" id={id} colorName={colorName} color={color} className="Input_color" disabled={disabled} />
 				{/* can delete only in Menu */}
 				{!disabled && <Icon src="close" onClick={(e) => this.deleteColor(e)} className="ml" />}
 			</div>

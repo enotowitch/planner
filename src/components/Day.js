@@ -10,8 +10,8 @@ export default class Day extends PureComponent {
 
 	static contextType = Context
 
-	getColorDayAndTask = () => getDay(this.props.day, this.context.curTaskName)
-	
+	getColorDayAndTask = () => getDay(this.props.day, this.context.curTaskName) // e.g #008015
+
 	// ! state
 	state = {
 		dayColor: this.getColorDayAndTask()
@@ -46,7 +46,7 @@ export default class Day extends PureComponent {
 
 		// ! weekDay,dayItems,dayNum
 		const weekDay = getWeekDay(day) // sun, mon, tue, ...	
-		const dayItems = subTasks.map(subTaskObj => subTaskObj.weekDay.includes(weekDay) && <DayItem subTaskName={subTaskObj.subTask} type={subTaskObj.type} />)
+		const dayItems = subTasks.map(subTaskObj => subTaskObj.weekDay.includes(weekDay) && <DayItem subTaskName={subTaskObj.subTask} type={subTaskObj.type} day={day} />)
 		const dayNum = day.match(/\d+/)
 		// ? weekDay,dayItems,dayNum
 
