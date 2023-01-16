@@ -1,5 +1,4 @@
 import React, { PureComponent } from "react"
-import InputState from "./InputState"
 import { Context } from "../context"
 import sort from "../functions/sort"
 import save from "../functions/save"
@@ -10,12 +9,18 @@ export default class Input extends PureComponent {
 
 	static contextType = Context
 
-	onChange = (setValue, e) => {
+	state = {
+		value: this.props.subTaskValue,
+		checked: this.props.subTaskValue
+	}
+
+	onChange = (e) => {
 		// handle input onChange
-		setValue(e)
+		this.setState({ value: e.target.value })
+		this.setState({ checked: e.target.checked })
 
 		// save to localStorage & state
-		const { name, id, value, type, role } = e.target
+		const { name, id, value, type, checked, role } = e.target
 		const { colors } = this.context
 		const { color, colorName, day, subTaskName } = this.props
 
@@ -37,33 +42,59 @@ export default class Input extends PureComponent {
 		// ? ROLE COLOR
 
 		// ! ROLE SUBTASK
+		const oldDay = getDay(day) // e.g { "day": "Jan 12", "exersize": "#ffd561" }
+		// ! type text
 		if (type === "text" && role === "subTask") {
-			const oldDay = getDay(day) // e.g { "day": "Jan 12", "exersize": "#ffd561" }
 			save(day, { ...oldDay, day, [subTaskName]: value })
 		}
+		// ? type text
+		// ! type checkbox
+		if (type === "checkbox" && role === "subTask") {
+			save(day, { ...oldDay, day, [subTaskName]: checked })
+		}
+		// ? type checkbox
 		// ? ROLE SUBTASK
 	}
 
 
 	render() {
 
-		const { type, className, colorName, color, disabled, id, role, subTaskValue } = this.props
+		const { type, className, colorName, color, disabled, id, role } = this.props
+		const { value, checked } = this.state
 
 		return (
-			<InputState>
-				{({ value, setValue }) => (
+			<>
+				{type !== "checkbox" &&
 					<input
 						type={type || "text"}
 						className={className || "Input"}
-						value={type === "text" && colorName || type === "color" && color || value || subTaskValue}
-						onChange={(e) => this.onChange(setValue, e)}
+						value={type === "text" && colorName || type === "color" && color || value}
+						onChange={(e) => this.onChange(e)}
 						disabled={disabled}
 						name={colorName || color}
 						id={id}
 						role={role}
 					/>
-				)}
-			</InputState>
+				}
+				{type === "checkbox" &&
+					<>
+						{checked ?
+							<input
+								type="checkbox"
+								checked={checked}
+								onChange={(e) => this.onChange(e)}
+								role={role}
+							/>
+							:
+							<input
+								type="checkbox"
+								onChange={(e) => this.onChange(e)}
+								role={role}
+							/>
+						}
+					</>
+				}
+			</>
 		)
 	}
 }

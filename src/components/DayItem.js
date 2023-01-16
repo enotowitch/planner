@@ -10,11 +10,11 @@ export default class DayItem extends PureComponent {
 
 		const subTaskValue = getDay(day) && getDay(day)[subTaskName] // getting value of subTaskName: e.g "15 15 15"
 
-		
+
 		return (
 			<div className="DayItem">
-				{type === "input" && <TextAndInput text={subTaskName} subTaskValue={subTaskValue} day={day} />}
-				{type === "checkbox" && <CheckboxAndText text={subTaskName} />}
+				{type === "input" && <TextAndInput text={subTaskName} role="subTask" subTaskValue={subTaskValue} day={day} />}
+				{type === "checkbox" && <CheckboxAndText text={subTaskName} role="subTask" subTaskValue={subTaskValue} day={day} />}
 			</div>
 		)
 	}
