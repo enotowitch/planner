@@ -1,11 +1,11 @@
-import React, { PureComponent } from "react"
+import React, { Component } from "react"
 import { Context } from "../context"
 import sort from "../functions/sort"
 import save from "../functions/save"
 import getDay from "../functions/getDay"
 
 
-export default class Input extends PureComponent {
+export default class Input extends Component {
 
 	static contextType = Context
 
@@ -43,37 +43,66 @@ export default class Input extends PureComponent {
 
 		// ! ROLE SUBTASK
 		const oldDay = getDay(day) // e.g { "day": "Jan 12", "exersize": "#ffd561" }
+		const oldSubTasks = oldDay && oldDay.subTasks
+		const oldSubTask = oldDay && oldDay.subTasks && oldDay.subTasks[subTaskName]
 		// ! type text
 		if (type === "text" && role === "subTask") {
-			save(day, { ...oldDay, day, [subTaskName]: value })
+			save(day, { ...oldDay, day, subTasks: { ...oldSubTasks, [subTaskName]: { ...oldSubTask, value: value } } })
 		}
 		// ? type text
 		// ! type checkbox
 		if (type === "checkbox" && role === "subTask") {
-			save(day, { ...oldDay, day, [subTaskName]: checked })
+			save(day, { ...oldDay, day, subTasks: { ...oldSubTasks, [subTaskName]: { ...oldSubTask, value: checked } } })
 		}
 		// ? type checkbox
 		// ? ROLE SUBTASK
 	}
 
+	onClick = (e) => {
+		const { day, color, setDayState, place } = this.props
+		// console.log(this.props)
+
+		const oldDay = getDay(day) // e.g { "day": "Jan 12", "exersize": "#ffd561" }
+
+		// ! color day
+		if (place === "day") {
+			const { curTaskName } = this.context
+
+			save(day, { ...oldDay, day, [curTaskName]: color }) // e.g { "day": "Jan 12", "exersize": "#ffd561", "learn": "#008015"}
+			setDayState("color", color)
+		}
+		if (place === "dayItem") {
+			const subTaskName = e.target.closest(".Day__top").querySelector(".Day__title").innerText
+			const oldSubTasks = oldDay && oldDay.subTasks
+			const oldSubTask = oldDay && oldDay.subTasks && oldDay.subTasks[subTaskName]
+			
+			save(day, { ...oldDay, day, subTasks: { ...oldSubTasks, [subTaskName]: { ...oldSubTask, color: color } } })
+			e.target.closest(".Day__top").querySelector("img").click() // close this dayItem's options
+		}
+		// ? color day
+	}
+
 
 	render() {
 
-		const { type, className, colorName, color, disabled, id, role } = this.props
+		const { type, className, colorName, color, readOnly, id, role } = this.props
 		const { value, checked } = this.state
 
 		return (
 			<>
+				{/* type text & color */}
 				{type !== "checkbox" &&
 					<input
 						type={type || "text"}
 						className={className || "Input"}
 						value={type === "text" && colorName || type === "color" && color || value}
 						onChange={(e) => this.onChange(e)}
-						disabled={disabled}
+						readOnly={readOnly}
+						disabled={type === "color" && readOnly && true}
 						name={colorName || color}
 						id={id}
 						role={role}
+						onClick={(e) => readOnly && this.onClick(e)}
 					/>
 				}
 				{type === "checkbox" &&

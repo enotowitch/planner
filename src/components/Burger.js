@@ -1,7 +1,7 @@
-import React, { PureComponent } from "react"
+import React, { Component } from "react"
 import Toggler from "./Toggler"
 
-export default class Burger extends PureComponent {
+export default class Burger extends Component {
 
 	render() {
 		return (

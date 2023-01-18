@@ -1,10 +1,10 @@
-import React, { PureComponent } from "react"
+import React, { Component } from "react"
 import Month from "./Month"
 import { Context } from "../context"
 import TaskToggler from "./TogglerPrevNext"
 import MonthToggler from "./TogglerPrevNext"
 
-export default class TaskAndMonth extends PureComponent {
+export default class TaskAndMonth extends Component {
 
 	static contextType = Context
 

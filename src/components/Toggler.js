@@ -1,6 +1,6 @@
-import React, { PureComponent } from "react"
+import React, { Component } from "react"
 
-export default class Toggler extends PureComponent {
+export default class Toggler extends Component {
 
 	state = {
 		on: this.props.defaultState

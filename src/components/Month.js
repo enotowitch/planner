@@ -1,8 +1,8 @@
-import React, { PureComponent } from "react"
+import React, { Component } from "react"
 import Day from "./Day"
 import listOfMonths from "../listOfMonths"
 
-export default class Month extends PureComponent {
+export default class Month extends Component {
 
 	render() {
 

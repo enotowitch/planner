@@ -1,11 +1,11 @@
-import React, { PureComponent } from "react"
+import React, { Component } from "react"
 import Icon from "./Icon"
 import Input from "./Input"
 import { Context } from "../context"
 import save from "../functions/save"
 import getDay from "../functions/getDay"
 
-export default class InputAndColor extends PureComponent {
+export default class InputAndColor extends Component {
 
 	static contextType = Context
 
@@ -18,29 +18,19 @@ export default class InputAndColor extends PureComponent {
 		save("colors", deleted, setAppState)
 	}
 
-	writeDay = () => {
-		const { day, color, setStateDayColor } = this.props
-		const { curTaskName } = this.context
-
-		const oldDay = getDay(day) // e.g { "day": "Jan 12", "exersize": "#ffd561" }
-
-		save(day, { ...oldDay, day, [curTaskName]: color }) // e.g { "day": "Jan 12", "exersize": "#ffd561", "learn": "#008015"}
-		setStateDayColor(color)
-	}
-
 	// ! RENDER
 	render() {
 
-		const { id, colorName, color, disabled } = this.props
-		const { writeDay } = this
+		const { id, colorName, color, readOnly, day, setDayState, place } = this.props
+		// console.log(this.props)
 
 		return (
-			// disabled means that it's in "dayOptions", so user wants to color this day
-			<div className="f" onClick={disabled && writeDay}>
-				<Input role="color" type="text" id={id} colorName={colorName} color={color} className="Input" disabled={disabled} />
-				<Input role="color" type="color" id={id} colorName={colorName} color={color} className="Input_color" disabled={disabled} />
+			// readOnly means that it's in "dayOptions", so user wants to color this day
+			<div className="f">
+				<Input role="color" type="text" id={id} colorName={colorName} color={color} className="Input" readOnly={readOnly} day={day} setDayState={setDayState} place={place} />
+				<Input role="color" type="color" id={id} colorName={colorName} color={color} className="Input_color" readOnly={readOnly} day={day} setDayState={setDayState} place={place} />
 				{/* can delete only in Menu */}
-				{!disabled && <Icon src="close" onClick={(e) => this.deleteColor(e)} className="ml" />}
+				{!readOnly && <Icon src="close" onClick={(e) => this.deleteColor(e)} className="ml" />}
 			</div>
 		)
 	}

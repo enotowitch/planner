@@ -1,7 +1,7 @@
-import React, { PureComponent } from "react"
+import React, { Component } from "react"
 import Icon from "./Icon"
 
-export default class TogglerPrevNext extends PureComponent {
+export default class TogglerPrevNext extends Component {
 
 	render() {
 

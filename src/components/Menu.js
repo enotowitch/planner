@@ -1,10 +1,10 @@
-import React, { PureComponent } from "react"
+import React, { Component } from "react"
 import InputsAndColors from "./InputsAndColors"
 import { Context } from "../context"
 import Icon from "./Icon"
 import save from "../functions/save"
 
-export default class Menu extends PureComponent {
+export default class Menu extends Component {
 
 	static contextType = Context
 

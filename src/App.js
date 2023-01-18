@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import Burger from "./components/Burger";
 import Menu from "./components/Menu";
 import TaskAndMonth from "./components/TaskAndMonth";
@@ -6,7 +6,7 @@ import { Context } from "./context"
 import lsColors from "./lsColors"
 import save from "./functions/save"
 
-class App extends PureComponent {
+class App extends Component {
 
 	// ! state
 	state = {
@@ -63,6 +63,7 @@ class App extends PureComponent {
 
 		const curTaskName = String(Object.keys(tasks[taskNum]))
 
+		// console.log(localStorage)
 
 		// ! RETURN
 		return (

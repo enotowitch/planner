@@ -1,6 +1,6 @@
-import React, { PureComponent } from "react"
+import React, { Component } from "react"
 
-export default class Icon extends PureComponent {
+export default class Icon extends Component {
 
 	render() {
 

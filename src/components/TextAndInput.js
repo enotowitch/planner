@@ -1,7 +1,7 @@
-import React, { PureComponent } from "react"
+import React, { Component } from "react"
 import Input from "./Input"
 
-export default class TextAndInput extends PureComponent {
+export default class TextAndInput extends Component {
 	render() {
 
 		const { text, role, subTaskValue, day } = this.props
