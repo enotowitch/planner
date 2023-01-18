@@ -59,25 +59,27 @@ export default class Input extends Component {
 	}
 
 	onClick = (e) => {
-		const { day, color, setDayState, place } = this.props
+		const { day, color, colorName, setDayState, place } = this.props
 		// console.log(this.props)
 
 		const oldDay = getDay(day) // e.g { "day": "Jan 12", "exersize": "#ffd561" }
+		const closeOptions = () => e.target.closest(".Day__top").querySelector("img").click()
 
 		// ! color day
 		if (place === "day") {
 			const { curTaskName } = this.context
 
-			save(day, { ...oldDay, day, [curTaskName]: color }) // e.g { "day": "Jan 12", "exersize": "#ffd561", "learn": "#008015"}
+			save(day, { ...oldDay, day, tasks: { [curTaskName]: { color: color, colorName: colorName } } }) // e.g { "day": "Jan 12", "exersize": "#ffd561", "learn": "#008015"}
 			setDayState("color", color)
+			closeOptions()
 		}
 		if (place === "dayItem") {
 			const subTaskName = e.target.closest(".Day__top").querySelector(".Day__title").innerText
 			const oldSubTasks = oldDay && oldDay.subTasks
 			const oldSubTask = oldDay && oldDay.subTasks && oldDay.subTasks[subTaskName]
-			
-			save(day, { ...oldDay, day, subTasks: { ...oldSubTasks, [subTaskName]: { ...oldSubTask, color: color } } })
-			e.target.closest(".Day__top").querySelector("img").click() // close this dayItem's options
+
+			save(day, { ...oldDay, day, subTasks: { ...oldSubTasks, [subTaskName]: { ...oldSubTask, color: color, colorName: colorName } } })
+			closeOptions()
 		}
 		// ? color day
 	}

@@ -3,6 +3,7 @@ import InputsAndColors from "./InputsAndColors"
 import { Context } from "../context"
 import Icon from "./Icon"
 import save from "../functions/save"
+import OnOff from "./OnOff"
 
 export default class Menu extends Component {
 
@@ -26,6 +27,8 @@ export default class Menu extends Component {
 				{menuOn &&
 					<>
 						<div className="Menu">
+							<OnOff text="COLOR MEMO" />
+
 							<InputsAndColors />
 						</div>
 

@@ -5,6 +5,7 @@ import TaskAndMonth from "./components/TaskAndMonth";
 import { Context } from "./context"
 import lsColors from "./lsColors"
 import save from "./functions/save"
+import setCookie from "./functions/setCookie";
 
 class App extends Component {
 
@@ -26,6 +27,9 @@ class App extends Component {
 	render() {
 
 		// ! DEFAULT
+		// ! cookies
+		!document.cookie.match(/colorMemo/) && setCookie("colorMemo", false)
+		// ? cookies
 		// ! colors
 		if (localStorage.length === 0) {
 			save("colors",
@@ -35,26 +39,27 @@ class App extends Component {
 					{ id: 2, colorName: "fail", color: "#ff8c92" },
 					{ id: 3, colorName: "rest", color: "#ff7fff" },
 				])
+			// ? colors
+			// ! tasks
+			save("tasks",
+				[
+					{
+						exersize:
+							[
+								{ subTask: "pull ups", weekDay: ["tue", "sat", "sun"], type: "input" },
+								{ subTask: "push ups", weekDay: ["wed", "mon", "sun"], type: "input" }
+							]
+					},
+					{
+						learn:
+							[
+								{ subTask: "js", weekDay: ["mon", "tue", "wed"], type: "checkbox" },
+								{ subTask: "react", weekDay: ["thu", "fri", "sat"], type: "checkbox" }
+							]
+					}
+				])
+			window.location.reload() // make sure all defaults saved
 		}
-		// ? colors
-		// ! tasks
-		save("tasks",
-			[
-				{
-					exersize:
-						[
-							{ subTask: "pull ups", weekDay: ["tue", "sat", "sun"], type: "input" },
-							{ subTask: "push ups", weekDay: ["wed", "mon", "sun"], type: "input" }
-						]
-				},
-				{
-					learn:
-						[
-							{ subTask: "js", weekDay: ["mon", "tue", "wed"], type: "checkbox" },
-							{ subTask: "react", weekDay: ["thu", "fri", "sat"], type: "checkbox" }
-						]
-				}
-			])
 		// ? tasks
 		// ? DEFAULT
 

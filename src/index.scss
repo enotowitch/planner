@@ -48,15 +48,33 @@
 	}
 	&__options{
 		position: absolute;
+		top: 0;
+		left: 0;
 		background: gray;
-		padding-top: 15px;
+		padding-top: 20px;
 		min-height: 100%;
 	}
 }
 .InputsAndColors{
 	max-width: 400px;
 	margin: 0 auto;
+}
+.Menu .InputsAndColors{
 	padding: 0 15px;
+}
+.OnOff{
+	position: relative;
+	width: 60px;
+	height: 29px;
+	border-radius: 20px;
+	border: 2px solid rgb(78, 78, 78);
+	span{
+		position: absolute;
+		display: inline-block;
+		width: 25px;
+		height: 25px;
+		border-radius: 50%;
+	}
 }
 
 // ! BURGER

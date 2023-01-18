@@ -6,12 +6,25 @@ import Icon from "./Icon"
 import getDay from "../functions/getDay"
 import { Context } from "../context"
 import Mark from "./Mark"
+import getCookie from "../functions/getCookie"
 
 export default class Day extends Component {
 
 	static contextType = Context
 
-	getColorDayAndTask = () => getDay(this.props.day, this.context.curTaskName) // e.g #008015
+	getColorDayAndTask = () => {
+		const day = getDay(this.props.day) // e.g {day: 'Jan 1', subTasks: {…}, tasks: {…}}
+		const curTask = day && day.tasks && day.tasks[this.context.curTaskName] // e.g {color: '#87d20c', colorName: 'success'}
+		const colorName = day && curTask && curTask.colorName // e.g "success"
+		let color
+
+		if (getCookie("colorMemo")) { // keep old colors even if they changed
+			color = curTask && curTask.color
+		} else { // default = false, rerender new colors
+			this.context.colors.map(colorObj => colorName === colorObj.colorName && (color = colorObj.color))
+		}
+		return color // e.g #008015
+	}
 	getWeekDay = (date) => new Date(`${date}, 2023`).toLocaleTimeString("en-us", { weekday: 'short' }).match(/.*?\s/)[0].toLowerCase().trim()
 
 	// ! state
@@ -57,7 +70,7 @@ export default class Day extends Component {
 		const dayNum = day.match(/\d+/)
 		// ? weekDay,dayItems,dayNum
 
-		
+
 		// ! RETURN
 		return (
 			<div className="Day" style={{ background: color }}>
