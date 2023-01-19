@@ -3,7 +3,7 @@ import Burger from "./components/Burger";
 import Menu from "./components/Menu";
 import TaskAndMonth from "./components/TaskAndMonth";
 import { Context } from "./context"
-import lsColors from "./lsColors"
+import lsData from "./lsData"
 import save from "./functions/save"
 import setCookie from "./functions/setCookie";
 
@@ -13,8 +13,8 @@ class App extends Component {
 	state = {
 		taskAndMonthOn: true,
 		menuOn: false,
-		colors: lsColors,
-		tasks: eval(localStorage.getItem("tasks")),
+		colors: lsData("colors"),
+		tasks: lsData("tasks"),
 		taskNum: 0,
 		monthNum: 0
 	}
@@ -46,15 +46,15 @@ class App extends Component {
 					{
 						exersize:
 							[
-								{ subTask: "pull ups", weekDay: ["tue", "sat", "sun"], type: "input" },
-								{ subTask: "push ups", weekDay: ["wed", "mon", "sun"], type: "input" }
+								{ subTask: "pull ups", mode: "week", week: ["tue"], month: [], type: "input" },
+								{ subTask: "push ups", mode: "week", week: ["wed"], month: [], type: "input" }
 							]
 					},
 					{
 						learn:
 							[
-								{ subTask: "js", weekDay: ["mon", "tue", "wed"], type: "checkbox" },
-								{ subTask: "react", weekDay: ["thu", "fri", "sat"], type: "checkbox" }
+								{ subTask: "js", mode: "week", week: ["mon"], month: [], type: "checkbox" },
+								{ subTask: "react", mode: "week", week: ["thu"], month: [], type: "checkbox" }
 							]
 					}
 				])

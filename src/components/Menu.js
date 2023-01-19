@@ -4,6 +4,8 @@ import { Context } from "../context"
 import Icon from "./Icon"
 import save from "../functions/save"
 import OnOff from "./OnOff"
+import TasksAndSubTasks from "./TasksAndSubTasks"
+import MarksAndColors from "./MarksAndColors"
 
 export default class Menu extends Component {
 
@@ -27,9 +29,9 @@ export default class Menu extends Component {
 				{menuOn &&
 					<>
 						<div className="Menu">
-							<OnOff text="COLOR MEMO" />
+							<TasksAndSubTasks />
 
-							<InputsAndColors />
+							<MarksAndColors />
 						</div>
 
 						<Icon src="add" onClick={addColor} className="c mt" />

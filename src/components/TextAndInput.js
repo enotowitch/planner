@@ -9,7 +9,7 @@ export default class TextAndInput extends Component {
 		return (
 			<>
 				<span className="Text">{text}</span>
-				<Input role={role} type="text" subTaskName={text} subTaskValue={subTaskValue} day={day} />
+				<Input role={role} type="text" subTaskName={text} value={subTaskValue} day={day} />
 			</>
 		)
 	}

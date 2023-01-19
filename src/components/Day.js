@@ -66,8 +66,16 @@ export default class Day extends Component {
 
 		// ! weekDay,dayItems,dayNum
 		const weekDay = getWeekDay(day) // sun, mon, tue, ...	
-		const dayItems = subTasks.map(subTaskObj => subTaskObj.weekDay.includes(weekDay) && <DayItem subTaskName={subTaskObj.subTask} type={subTaskObj.type} day={day} setDayState={setDayState} place="dayItem" />)
-		const dayNum = day.match(/\d+/)
+		const dayNum = Number(day.match(/\d+/)[0])
+		
+		const dayItems = subTasks.map(subTaskObj => {
+			if (subTaskObj.mode === "week") {
+				return subTaskObj.week.includes(weekDay) && <DayItem subTaskName={subTaskObj.subTask} type={subTaskObj.type} day={day} setDayState={setDayState} place="dayItem" />
+			}
+			if (subTaskObj.mode === "month") {
+				return subTaskObj.month.includes(dayNum) && <DayItem subTaskName={subTaskObj.subTask} type={subTaskObj.type} day={day} setDayState={setDayState} place="dayItem" />
+			}
+		})
 		// ? weekDay,dayItems,dayNum
 
 

@@ -10,8 +10,8 @@ export default class Input extends Component {
 	static contextType = Context
 
 	state = {
-		value: this.props.subTaskValue,
-		checked: this.props.subTaskValue
+		value: this.props.value,
+		checked: this.props.value
 	}
 
 	onChange = (e) => {

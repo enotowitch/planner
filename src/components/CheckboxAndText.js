@@ -8,7 +8,7 @@ export default class CheckboxAndText extends Component {
 
 		return (
 			<>
-				<Input role={role} type="checkbox" subTaskName={text} subTaskValue={subTaskValue} day={day} />
+				<Input role={role} type="checkbox" subTaskName={text} value={subTaskValue} day={day} />
 				<span>{text}</span>
 			</>
 		)
