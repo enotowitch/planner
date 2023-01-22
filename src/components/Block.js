@@ -8,7 +8,6 @@ export default class Block extends Component {
 
 	blockFn = () => {
 		const { modeName, taskName, subTaskName, text, changeMode } = this.props
-		// console.log(this.props)
 
 		// change `mode` like mode="week" to mode="month"
 		if (changeMode) {
@@ -39,10 +38,12 @@ export default class Block extends Component {
 					taskObj[taskName].map(subTaskObj => {
 						if (subTaskObj.subTask === subTaskName) {
 							// toggler: if there is no day => add it; if there is the day => remove it
-							if (!subTaskObj[modeName].includes(text)) {
+							if (!subTaskObj[modeName].includes(text)) { // e.g subTaskObj[modeName]: ["sun", "tue", "mon"]
 								subTaskObj[modeName].push(text)
+								this.setState({ color: "white" }) // color: not chosen
 							} else {
 								subTaskObj[modeName].splice(subTaskObj[modeName].indexOf(text), 1)
+								this.setState({ color: "pink" }) // color: chosen
 							}
 							return subTaskObj
 						} else {
@@ -58,10 +59,16 @@ export default class Block extends Component {
 		}
 	}
 
+	// ! state
+	state = {
+		color: ""
+	}
+
+
+	// ! RENDER
 	render() {
 		const { text, chosen } = this.props // e.g { "text": "mon", "modeName": "weekDay", "subTaskName": "push ups", "taskName": "exersize" }
-		// console.log(this.props)
-		const color = chosen && chosen.includes(text) && "pink"
+		const color = chosen && chosen.includes(text) && "pink" // e.g chosen : ["sun", "tue", "mon"] ||  chosen : [1, 2, 8, 9, 3]
 
 		return (
 			<div className="Block" onClick={this.blockFn} style={{ background: color }}>

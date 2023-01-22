@@ -13,7 +13,6 @@ export default class DayItem extends Component {
 	render() {
 
 		const { subTaskName, type, day, setDayState, place } = this.props // e.g subTaskName: 'pull ups', type: 'input', day: 'Jan 24'
-		// console.log(this.props)
 
 		const subTask = getDay(day) && getDay(day)["subTasks"] && getDay(day)["subTasks"][subTaskName] // e.g {"color": "#a3ffbf","colorName": "success","value": "15 15 15"}
 		const subTaskValue = subTask && subTask.value // e.g "15 15 15"

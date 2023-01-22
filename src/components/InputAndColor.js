@@ -22,7 +22,6 @@ export default class InputAndColor extends Component {
 	render() {
 
 		const { id, colorName, color, readOnly, day, setDayState, place } = this.props
-		// console.log(this.props)
 
 		return (
 			// readOnly means that it's in "dayOptions", so user wants to color this day

@@ -61,9 +61,6 @@ export default class Day extends Component {
 		const { color, optionOn, title, place } = this.state
 		const { getWeekDay, setDayState } = this
 
-		// console.log(this.props)
-		// console.log(this.state)
-
 		// ! weekDay,dayItems,dayNum
 		const weekDay = getWeekDay(day) // sun, mon, tue, ...	
 		const dayNum = Number(day.match(/\d+/)[0])

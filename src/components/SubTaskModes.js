@@ -2,16 +2,11 @@ import React, { Component } from "react"
 import Block from "./Block"
 import Mode from "./Mode"
 import { Context } from "../context"
+import Select from "./Select"
 
 export default class SubTaskModes extends Component {
 
 	static contextType = Context
-
-	state = {
-		parent: { 0: true, 1: true, 2: true, 3: true },
-		kids: { 0: false, 1: false, 2: false, 3: false },
-		counter: 0
-	}
 
 	setOn = (id) => {
 		// even/odd clicks toggle parent & kids
@@ -30,7 +25,7 @@ export default class SubTaskModes extends Component {
 
 	addCounter = () => this.setState(prev => ({ counter: prev.counter + 1 }))
 
-	chosen = (data) => {
+	chosen = (modeName) => {
 
 		const { subTaskName, taskName } = this.props
 
@@ -40,7 +35,7 @@ export default class SubTaskModes extends Component {
 			if (taskObjName === taskName) {
 				taskObj[taskName].map(subTaskObj => {
 					if (subTaskObj.subTask === subTaskName) {
-						chosen = subTaskObj[data]
+						chosen = subTaskObj[modeName]
 					}
 				})
 			}
@@ -48,19 +43,30 @@ export default class SubTaskModes extends Component {
 		return chosen
 	}
 
+	// ! state
+	state = {
+		parent: { 0: true, 1: true, 2: true, 3: true },
+		kids: { 0: false, 1: false, 2: false, 3: false },
+		counter: 0,
+		day: this.chosen("day") && this.chosen("day")
+	}
+
+	setSubTaskModesState = (stateName, newValue) => this.setState({ [stateName]: newValue })
+	// ? state
 
 	// ! RENDER
 	render() {
 
 		const { subTaskName, taskName } = this.props
-		const { chosen, setOn, addCounter } = this
+		const { day } = this.state
+		const { chosen, setOn, addCounter, setSubTaskModesState } = this
 
 		const weekDays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"].map(weekDay => <Block text={weekDay} modeName="week" subTaskName={subTaskName} taskName={taskName} chosen={chosen("week")} />)
-
 		const monthDays = Array.from({ length: 31 }, (v, k) => k + 1).map(monthDay => <Block text={monthDay} modeName="month" subTaskName={subTaskName} taskName={taskName} chosen={chosen("month")} />)
+		const days = day && day.map(egMar9 => <Select selectMode="read" text={egMar9} modeName="day" subTaskName={subTaskName} taskName={taskName} setSubTaskModesState={setSubTaskModesState} />)
 
-		// console.log(this.props)
 
+		// ! RETURN
 		return (
 			<div className="f Modes">
 				<Mode id={0} on={this.state} setOn={setOn} addCounter={addCounter} text="week" subTaskName={subTaskName} taskName={taskName}>
@@ -70,7 +76,8 @@ export default class SubTaskModes extends Component {
 					{monthDays}
 				</Mode>
 				<Mode id={2} on={this.state} setOn={setOn} addCounter={addCounter} text="day" subTaskName={subTaskName} taskName={taskName}>
-
+					<Select selectMode="write" text="pick day" modeName="day" subTaskName={subTaskName} taskName={taskName} setSubTaskModesState={setSubTaskModesState} />
+					{days}
 				</Mode>
 				<Mode id={3} on={this.state} setOn={setOn} addCounter={addCounter} text="interval" subTaskName={subTaskName} taskName={taskName}>
 

@@ -60,7 +60,6 @@ export default class Input extends Component {
 
 	onClick = (e) => {
 		const { day, color, colorName, setDayState, place } = this.props
-		// console.log(this.props)
 
 		const oldDay = getDay(day) // e.g { "day": "Jan 12", "exersize": "#ffd561" }
 		const closeOptions = () => e.target.closest(".Day__top").querySelector("img").click()

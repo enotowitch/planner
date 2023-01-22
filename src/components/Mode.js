@@ -11,7 +11,6 @@ export default class Mode extends Component {
 	render() {
 		const { id, on, text, children, subTaskName, taskName } = this.props
 		const modeText = on.counter % 2 === 0 ? text : "BACK"
-		// console.log(this.props)
 
 		return (
 			<>

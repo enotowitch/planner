@@ -12,7 +12,6 @@ export default class Mark extends Component {
 	render() {
 
 		const { optionOn, className } = this.props
-		// console.log(this.props)
 
 		return (
 			<Icon src={optionOn ? "close" : "open"} onClick={this.markFn} className={className} />
