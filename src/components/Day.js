@@ -66,7 +66,7 @@ export default class Day extends Component {
 
 		// ! weekDay, dayItems, dayNum, monthName
 		const weekDay = getWeekDay(day) // sun, mon, tue, ...	
-		const dayNum = day.match(/\d+/)[0]
+		const dayNum = Number(day.match(/\d+/)[0])
 		const monthName = getMonthName(monthNum)
 
 		const dayItems = subTasks.map(subTaskObj => {

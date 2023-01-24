@@ -10,7 +10,7 @@ export default class SelectInterval extends Component {
 
 	// ! state
 	state = {
-		start: getDate(), // today e.g "Jan 23"
+		start: getDate(), // today if no intervalInfo; e.g "Jan 23"
 		interval: 1, // everyday
 		times: 999
 	}
@@ -45,7 +45,7 @@ export default class SelectInterval extends Component {
 				}
 
 				results[year] && results[year][month] && results[year][month].push(day) // e.g "interval":{"2023":{"Jan":["1","3"]}}
-				
+
 				result += unixInterval // e.g "Jan 1" + 2 days = "Jan 3"
 			}
 
@@ -60,6 +60,10 @@ export default class SelectInterval extends Component {
 								// remove all, write new
 								subTaskObj[modeName] = []
 								subTaskObj[modeName] = results
+
+								// interval info: e.g "intervalInfo":{"start":"Feb 14","interval":"14","times":"14"}
+								subTaskObj["intervalInfo"] = { start: getDate(unixStart * 1000), interval, times }
+
 								return subTaskObj
 							} else {
 								return subTaskObj
@@ -76,6 +80,24 @@ export default class SelectInterval extends Component {
 		}, 1);
 
 	}
+
+	// ! componentDidMount
+	componentDidMount() {
+		const { taskName, subTaskName } = this.props
+
+		this.context.tasks.map(taskObj => {
+			const taskObjName = String(Object.keys(taskObj))
+			if (taskObjName === taskName) {
+				taskObj[taskName].map(subTaskObj => {
+					if (subTaskObj.subTask === subTaskName) {
+						// set state to prev picked intervalInfo e.g {"start":"Feb 14","interval":"14","times":"14"}
+						this.setState(subTaskObj.intervalInfo)
+					}
+				})
+			}
+		})
+	}
+	// ? componentDidMount
 
 
 	// ! RENDER

@@ -13,13 +13,13 @@ export default class SubTaskModes extends Component {
 		// even/odd clicks toggle parent & kids
 		if (this.state.counter % 2 === 0) { // show clicked Mode's kids
 			this.setState(prev => ({
-				parent: { 0: false, 1: false, 2: false, 3: false, [id]: true },
-				kids: { 0: false, 1: false, 2: false, 3: false, [id]: true }
+				parent: { 0: false, 1: false, 2: false, 3: false, 4: false, [id]: true },
+				kids: { 0: false, 1: false, 2: false, 3: false, 4: false, [id]: true }
 			}))
 		} else { // back to default state: show all Modes
 			this.setState({
-				parent: { 0: true, 1: true, 2: true, 3: true },
-				kids: { 0: false, 1: false, 2: false, 3: false }
+				parent: { 0: true, 1: true, 2: true, 3: true, 4: true },
+				kids: { 0: false, 1: false, 2: false, 3: false, 4: false }
 			})
 		}
 	}
@@ -46,8 +46,8 @@ export default class SubTaskModes extends Component {
 
 	// ! state
 	state = {
-		parent: { 0: true, 1: true, 2: true, 3: true },
-		kids: { 0: false, 1: false, 2: false, 3: false },
+		parent: { 0: true, 1: true, 2: true, 3: true, 4: true },
+		kids: { 0: false, 1: false, 2: false, 3: false, 4: false },
 		counter: 0,
 		day: this.chosen("day") && this.chosen("day")
 	}
@@ -70,20 +70,34 @@ export default class SubTaskModes extends Component {
 		// ! RETURN
 		return (
 			<div className="f Modes">
-				<Mode id={0} on={this.state} setOn={setOn} addCounter={addCounter} text="week" subTaskName={subTaskName} taskName={taskName}>
+
+				{/* mode: off */}
+				<Mode id={0} on={this.state} setOn={setOn} addCounter={addCounter} text="off" subTaskName={subTaskName} taskName={taskName}>
+					<div>"{subTaskName}" is off</div>
+				</Mode>
+
+				{/* mode: week */}
+				<Mode id={1} on={this.state} setOn={setOn} addCounter={addCounter} text="week" subTaskName={subTaskName} taskName={taskName}>
 					{weekDays}
 				</Mode>
-				<Mode id={1} on={this.state} setOn={setOn} addCounter={addCounter} text="month" subTaskName={subTaskName} taskName={taskName}>
+
+				{/* mode: month */}
+				<Mode id={2} on={this.state} setOn={setOn} addCounter={addCounter} text="month" subTaskName={subTaskName} taskName={taskName}>
 					{monthDays}
 				</Mode>
-				<Mode id={2} on={this.state} setOn={setOn} addCounter={addCounter} text="day" subTaskName={subTaskName} taskName={taskName}>
+
+				{/* mode: day */}
+				<Mode id={3} on={this.state} setOn={setOn} addCounter={addCounter} text="day" subTaskName={subTaskName} taskName={taskName}>
 					<SelectDay selectMode="write" text="pick day" modeName="day" subTaskName={subTaskName} taskName={taskName} setSubTaskModesState={setSubTaskModesState} />
 					{days}
 				</Mode>
-				<Mode id={3} on={this.state} setOn={setOn} addCounter={addCounter} text="interval" subTaskName={subTaskName} taskName={taskName}>
+
+				{/* mode: interval */}
+				<Mode id={4} on={this.state} setOn={setOn} addCounter={addCounter} text="interval" subTaskName={subTaskName} taskName={taskName}>
 					<SelectInterval modeName="interval" taskName={taskName} subTaskName={subTaskName} />
 				</Mode>
 			</div>
+
 		)
 	}
 }

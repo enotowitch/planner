@@ -25,7 +25,7 @@ export default (date, type) => {
 		}
 		if (type === "dayNum") {
 			// e.g 22
-			resultDate = new Date(date).toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric' }).match(/(\d{1,2})(?:,)/)[1]
+			resultDate = Number(new Date(date).toLocaleDateString("en-US", { year: 'numeric', month: 'short', day: 'numeric' }).match(/(\d{1,2})(?:,)/)[1])
 		}
 		if (type === "yearNum") {
 			// e.g 2023
