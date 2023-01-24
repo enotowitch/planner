@@ -21,8 +21,8 @@ export default class Input extends Component {
 
 		// save to localStorage & state
 		const { name, id, value, type, checked, role } = e.target
-		const { colors } = this.context
-		const { color, colorName, day, subTaskName } = this.props
+		const { colors, setAppState, tasks } = this.context
+		const { color, colorName, day, subTaskName, oldValue, setTaskState } = this.props
 
 		// ! ROLE COLOR
 		// ! type text
@@ -30,13 +30,13 @@ export default class Input extends Component {
 			const withoutDeletedColor = colors.filter(colorObj => colorObj.colorName !== name && colorObj.colorName) // delete prev colorName and void colorName
 			const newColors = [...withoutDeletedColor, { id: Number(id), colorName: value, color: color }]
 			sort(newColors)
-			save("colors", newColors, this.context.setAppState)
+			save("colors", newColors, setAppState)
 		}
 		// ? type text
 		// ! type color
 		if (type === "color" && role === "color") {
 			const newColors = colors.map(colorObj => colorObj.colorName === colorName ? { ...colorObj, "color": value } : colorObj)
-			save("colors", newColors, this.context.setAppState)
+			save("colors", newColors, setAppState)
 		}
 		// ? type color
 		// ? ROLE COLOR
@@ -56,6 +56,21 @@ export default class Input extends Component {
 		}
 		// ? type checkbox
 		// ? ROLE SUBTASK
+
+		// ! ROLE TASKNAME
+		if (type === "text" && role === "taskName") {
+			tasks.map(taskObj => {
+				const taskObjName = String(Object.keys(taskObj))
+
+				if (taskObjName === oldValue) {
+					// RENAME TASK (taskObj)
+					delete Object.assign(taskObj, { [value]: taskObj[oldValue] })[oldValue]
+					save("tasks", tasks)
+					setTaskState("taskName", value)
+				}
+			})
+		}
+		// ? ROLE TASKNAME
 	}
 
 	onClick = (e) => {
