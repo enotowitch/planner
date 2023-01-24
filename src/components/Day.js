@@ -7,6 +7,7 @@ import getDay from "../functions/getDay"
 import { Context } from "../context"
 import Mark from "./Mark"
 import getCookie from "../functions/getCookie"
+import getMonthName from "../functions/getMonthName"
 
 export default class Day extends Component {
 
@@ -25,7 +26,8 @@ export default class Day extends Component {
 		}
 		return color // e.g #008015
 	}
-	getWeekDay = (date) => new Date(`${date}, 2023`).toLocaleTimeString("en-us", { weekday: 'short' }).match(/.*?\s/)[0].toLowerCase().trim()
+
+	getWeekDay = (date) => new Date(`${date}, ${this.context.year}`).toLocaleTimeString("en-us", { weekday: 'short' }).match(/.*?\s/)[0].toLowerCase().trim()
 
 	// ! state
 	state = {
@@ -57,14 +59,16 @@ export default class Day extends Component {
 	// ! RENDER
 	render() {
 
-		const { day, subTasks } = this.props
+		const { day, subTasks } = this.props // day = e.g "Jan 23"
 		const { color, optionOn, title, place } = this.state
+		const { year, monthNum } = this.context
 		const { getWeekDay, setDayState } = this
 
-		// ! weekDay,dayItems,dayNum
+		// ! weekDay, dayItems, dayNum, monthName
 		const weekDay = getWeekDay(day) // sun, mon, tue, ...	
-		const dayNum = Number(day.match(/\d+/)[0])
-		
+		const dayNum = day.match(/\d+/)[0]
+		const monthName = getMonthName(monthNum)
+
 		const dayItems = subTasks.map(subTaskObj => {
 			if (subTaskObj.mode === "week") {
 				return subTaskObj.week.includes(weekDay) && <DayItem subTaskName={subTaskObj.subTask} type={subTaskObj.type} day={day} setDayState={setDayState} place="dayItem" />
@@ -72,8 +76,14 @@ export default class Day extends Component {
 			if (subTaskObj.mode === "month") {
 				return subTaskObj.month.includes(dayNum) && <DayItem subTaskName={subTaskObj.subTask} type={subTaskObj.type} day={day} setDayState={setDayState} place="dayItem" />
 			}
+			if (subTaskObj.mode === "day") {
+				return subTaskObj.day.includes(day) && <DayItem subTaskName={subTaskObj.subTask} type={subTaskObj.type} day={day} setDayState={setDayState} place="dayItem" />
+			}
+			if (subTaskObj.mode === "interval") {
+				return subTaskObj.interval && subTaskObj.interval[year] && subTaskObj.interval[year][monthName] && subTaskObj.interval[year][monthName].map(intervalDayNum => intervalDayNum === dayNum && <DayItem subTaskName={subTaskObj.subTask} type={subTaskObj.type} day={day} setDayState={setDayState} place="dayItem" />)
+			}
 		})
-		// ? weekDay,dayItems,dayNum
+		// ? weekDay, dayItems, dayNum, monthName
 
 
 		// ! RETURN

@@ -16,7 +16,8 @@ class App extends Component {
 		colors: lsData("colors"),
 		tasks: lsData("tasks"),
 		taskNum: 0,
-		monthNum: 0
+		monthNum: 0,
+		year: new Date().getFullYear()
 	}
 
 	setAppState = (stateName, newValue) => this.setState({ [stateName]: newValue })
@@ -46,15 +47,15 @@ class App extends Component {
 					{
 						exersize:
 							[
-								{ subTask: "pull ups", mode: "week", week: ["tue"], month: [], type: "input" },
-								{ subTask: "push ups", mode: "week", week: ["wed"], month: [], type: "input" }
+								{ subTask: "pull ups", mode: "week", week: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"], month: [], type: "input" },
+								{ subTask: "push ups", mode: "week", week: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"], month: [], type: "input" }
 							]
 					},
 					{
 						learn:
 							[
-								{ subTask: "js", mode: "week", week: ["mon"], month: [], type: "checkbox" },
-								{ subTask: "react", mode: "week", week: ["thu"], month: [], type: "checkbox" }
+								{ subTask: "js", mode: "week", week: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"], month: [], type: "checkbox" },
+								{ subTask: "react", mode: "week", week: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"], month: [], type: "checkbox" }
 							]
 					}
 				])

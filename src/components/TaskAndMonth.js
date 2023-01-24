@@ -3,25 +3,51 @@ import Month from "./Month"
 import { Context } from "../context"
 import TaskToggler from "./TogglerPrevNext"
 import MonthToggler from "./TogglerPrevNext"
+import getMonthName from "../functions/getMonthName"
 
 export default class TaskAndMonth extends Component {
 
 	static contextType = Context
 
-	prevFn = (stateName) => this.context.setAppState(stateName, this.context[stateName] - 1)
-	nextFn = (stateName) => this.context.setAppState(stateName, this.context[stateName] + 1)
+	// ! toggle month & year
+	prevFn = (stateName) => {
+		if (stateName === "monthNum") {
+			if (this.context.monthNum === 0) {
+				this.context.setAppState("year", this.context.year - 1)
+				this.context.setAppState("monthNum", 11)
+			} else {
+				this.context.setAppState(stateName, this.context[stateName] - 1)
+			}
+		} else {
+			// stateName: taskNum
+			this.context.setAppState(stateName, this.context[stateName] - 1)
+		}
+	}
+	nextFn = (stateName) => {
+		if (stateName === "monthNum") {
+			if (this.context.monthNum === 11) {
+				this.context.setAppState("year", this.context.year + 1)
+				this.context.setAppState("monthNum", 0)
+			} else {
+				this.context.setAppState(stateName, this.context[stateName] + 1)
+			}
+		} else {
+			// stateName: taskNum
+			this.context.setAppState(stateName, this.context[stateName] + 1)
+		}
+	}
+	// ? toggle month & year
 
 
 	// ! RENDER
 	render() {
 
-		const { tasks, taskAndMonthOn, taskNum, monthNum } = this.context // tasks = [{…}, {…}]
+		const { tasks, taskAndMonthOn, taskNum, monthNum, year } = this.context // tasks = [{…}, {…}]
 
 		const taskName = String(Object.keys(tasks[taskNum])) // learn || exersize
 		const task = tasks[taskNum] // {learn: {…}} || {exersize: {…}}
 
-		let monthName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-		monthName = monthName[monthNum]
+		const monthName = getMonthName(monthNum)
 
 		const { prevFn, nextFn } = this
 
@@ -29,11 +55,11 @@ export default class TaskAndMonth extends Component {
 			<>
 				{taskAndMonthOn &&
 					<>
-						<MonthToggler title={`${monthName}, 2023`} prevFn={() => prevFn("monthNum")} nextFn={() => nextFn("monthNum")} />
+						<MonthToggler title={`${monthName}, ${year}`} prevFn={() => prevFn("monthNum")} nextFn={() => nextFn("monthNum")} />
 
 						<TaskToggler title={taskName} prevFn={() => prevFn("taskNum")} nextFn={() => nextFn("taskNum")} />
 
-						<Month monthNum={monthNum} task={task} taskName={taskName} />
+						<Month task={task} taskName={taskName} />
 					</>
 				}
 			</>

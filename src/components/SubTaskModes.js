@@ -2,7 +2,8 @@ import React, { Component } from "react"
 import Block from "./Block"
 import Mode from "./Mode"
 import { Context } from "../context"
-import Select from "./Select"
+import SelectDay from "./SelectDay"
+import SelectInterval from "./SelectInterval"
 
 export default class SubTaskModes extends Component {
 
@@ -63,7 +64,7 @@ export default class SubTaskModes extends Component {
 
 		const weekDays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"].map(weekDay => <Block text={weekDay} modeName="week" subTaskName={subTaskName} taskName={taskName} chosen={chosen("week")} />)
 		const monthDays = Array.from({ length: 31 }, (v, k) => k + 1).map(monthDay => <Block text={monthDay} modeName="month" subTaskName={subTaskName} taskName={taskName} chosen={chosen("month")} />)
-		const days = day && day.map(egMar9 => <Select selectMode="read" text={egMar9} modeName="day" subTaskName={subTaskName} taskName={taskName} setSubTaskModesState={setSubTaskModesState} />)
+		const days = day && day.map(egMar9 => <SelectDay selectMode="read" text={egMar9} modeName="day" subTaskName={subTaskName} taskName={taskName} setSubTaskModesState={setSubTaskModesState} />)
 
 
 		// ! RETURN
@@ -76,11 +77,11 @@ export default class SubTaskModes extends Component {
 					{monthDays}
 				</Mode>
 				<Mode id={2} on={this.state} setOn={setOn} addCounter={addCounter} text="day" subTaskName={subTaskName} taskName={taskName}>
-					<Select selectMode="write" text="pick day" modeName="day" subTaskName={subTaskName} taskName={taskName} setSubTaskModesState={setSubTaskModesState} />
+					<SelectDay selectMode="write" text="pick day" modeName="day" subTaskName={subTaskName} taskName={taskName} setSubTaskModesState={setSubTaskModesState} />
 					{days}
 				</Mode>
 				<Mode id={3} on={this.state} setOn={setOn} addCounter={addCounter} text="interval" subTaskName={subTaskName} taskName={taskName}>
-
+					<SelectInterval modeName="interval" taskName={taskName} subTaskName={subTaskName} />
 				</Mode>
 			</div>
 		)

@@ -3,7 +3,7 @@ import save from "../functions/save"
 import listOfDays from "../listOfDays"
 import { Context } from "../context"
 
-export default class Select extends Component {
+export default class SelectDay extends Component {
 
 	static contextType = Context
 

@@ -22,7 +22,7 @@ export default class Task extends Component {
 
 		return (
 			<>
-				<div className="Task">
+				<div className="Task mt">
 					<Input className="Input Task__title" value={taskName} />
 					<div>
 						{subTasks}
