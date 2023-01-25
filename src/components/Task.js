@@ -69,8 +69,8 @@ export default class Task extends Component {
 		const subTasks = this.context.tasks.map(taskObj => {
 			const thisObjTaskName = String(Object.keys(taskObj))
 			return thisObjTaskName === taskName && taskObj[taskName].map(subTaskObj => {
-				const { subTask } = subTaskObj
-				return <SubTask subTaskName={subTask} taskName={taskName} />
+				const { subTask, type } = subTaskObj
+				return <SubTask subTaskName={subTask} taskName={taskName} type={type} />
 			}) // e.g subTaskObj = { "subTask": "pull ups", "mode": "weekDay", "weekDay": [ "tue", "sat", "sun" ], "type": "text" }
 		}) // e.g taskObj = { "exersize": [ { "subTask": "pull ups", "mode": "weekDay", "weekDay": [ "tue", "sat", "sun" ], "type": "text" }, { "subTask": "push ups", "mode": "weekDay", "weekDay": [ "wed", "mon", "sun" ], "type": "text" } ] }
 

@@ -14,13 +14,13 @@ export default class SubTask extends Component {
 
 	render() {
 
-		const { taskName } = this.props
+		const { taskName, type } = this.props
 		const { subTaskName } = this.state
 		const { setSubTaskState } = this
 
 		return (
 			<div className="fcc SubTask">
-				<SubTaskType subTaskName={subTaskName} taskName={taskName} />
+				<SubTaskType subTaskName={subTaskName} taskName={taskName} type={type} />
 				<Input role="subTaskName" className="Input SubTask__title" value={subTaskName} oldValue={subTaskName} taskName={taskName} setSubTaskState={setSubTaskState} />
 				<SubTaskModes subTaskName={subTaskName} taskName={taskName} />
 			</div>

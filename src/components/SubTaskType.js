@@ -31,10 +31,12 @@ export default class SubTaskType extends Component {
 	// ! RENDER
 	render() {
 
+		const { type } = this.props
+
 		return (
 			<>
-				<Icon src="typeInput" onClick={() => this.setSubTaskType("text")} />
-				<Icon src="typeCheckbox" onClick={() => this.setSubTaskType("checkbox")} />
+				<Icon src="typeText" onClick={() => this.setSubTaskType("text")} className={type === "text" && "chosen"} />
+				<Icon src="typeCheckbox" onClick={() => this.setSubTaskType("checkbox")} className={type === "checkbox" && "chosen"} />
 			</>
 		)
 	}
