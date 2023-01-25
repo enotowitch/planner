@@ -40,6 +40,25 @@ export default class Task extends Component {
 		setAppState("tasks", tasks)
 	}
 
+	deleteTask = () => {
+		const { tasks, setAppState } = this.context
+		const { taskName } = this.props
+
+		tasks.map((taskObj, ind) => {
+			const taskObjName = String(Object.keys(taskObj))
+
+			if (tasks.length === 1) {
+				throw new Error("Last task can not be deleted")
+			}
+
+			if (taskObjName === taskName) {
+				tasks.splice(ind, 1)
+				save("tasks", tasks, setAppState)
+				window.location.reload() // todo
+			}
+		})
+	}
+
 
 	// ! RENDER
 	render() {
@@ -61,6 +80,9 @@ export default class Task extends Component {
 			<>
 				<div className="Task mt">
 					<Input role="taskName" className="Input Task__title" value={taskName} oldValue={taskName} setTaskState={setTaskState} />
+
+					<Icon src="close" onClick={this.deleteTask} className="ml" />
+
 					<div>
 						{subTasks}
 

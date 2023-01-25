@@ -4,6 +4,8 @@ import Mode from "./Mode"
 import { Context } from "../context"
 import SelectDay from "./SelectDay"
 import SelectInterval from "./SelectInterval"
+import Icon from "./Icon"
+import save from "../functions/save"
 
 export default class SubTaskModes extends Component {
 
@@ -55,11 +57,32 @@ export default class SubTaskModes extends Component {
 	setSubTaskModesState = (stateName, newValue) => this.setState({ [stateName]: newValue })
 	// ? state
 
+	deleteSubTask = () => {
+		const { subTaskName, taskName } = this.props
+		const { tasks, setAppState } = this.context
+
+		tasks.map(taskObj => {
+			const taskObjName = String(Object.keys(taskObj))
+
+			if (taskObjName === taskName) {
+				const task = taskObj[taskName] // e.g [ { "subTask": "pull ups", "mode": "week", "week": [], "month": [], "type": "input" }, { "subTask": "push ups", "mode": "week", "week": [], "month": [], "type": "input" } ]
+				
+				task.map((subTaskObj, ind) => {
+					if (subTaskObj.subTask === subTaskName) {
+						task.splice(ind, 1)
+						save("tasks", tasks, setAppState)
+						window.location.reload() // todo
+					}
+				})
+			}
+		})
+	}
+
 	// ! RENDER
 	render() {
 
 		const { subTaskName, taskName } = this.props
-		const { day } = this.state
+		const { day, counter } = this.state
 		const { chosen, setOn, addCounter, setSubTaskModesState } = this
 
 		const weekDays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"].map(weekDay => <Block text={weekDay} modeName="week" subTaskName={subTaskName} taskName={taskName} chosen={chosen("week")} />)
@@ -96,8 +119,10 @@ export default class SubTaskModes extends Component {
 				<Mode id={4} on={this.state} setOn={setOn} addCounter={addCounter} text="interval" subTaskName={subTaskName} taskName={taskName}>
 					<SelectInterval modeName="interval" taskName={taskName} subTaskName={subTaskName} />
 				</Mode>
-			</div>
 
+				{/* show "delete subTask" only when mode children are off */}
+				{counter % 2 === 0 && <Icon src="close" onClick={this.deleteSubTask} className="ml mr" />}
+			</div>
 		)
 	}
 }
