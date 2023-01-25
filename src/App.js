@@ -47,15 +47,15 @@ class App extends Component {
 					{
 						exersize:
 							[
-								{ subTask: "pull ups", mode: "week", week: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"], month: [], type: "input" },
-								{ subTask: "push ups", mode: "week", week: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"], month: [], type: "input" }
+								{ subTask: "pull ups", mode: "off", week: [], month: [], type: "input" },
+								{ subTask: "push ups", mode: "off", week: [], month: [], type: "input" }
 							]
 					},
 					{
 						learn:
 							[
-								{ subTask: "js", mode: "week", week: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"], month: [], type: "checkbox" },
-								{ subTask: "react", mode: "week", week: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"], month: [], type: "checkbox" }
+								{ subTask: "js", mode: "off", week: [], month: [], type: "checkbox" },
+								{ subTask: "react", mode: "off", week: [], month: [], type: "checkbox" }
 							]
 					}
 				])

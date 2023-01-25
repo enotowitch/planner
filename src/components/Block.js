@@ -37,6 +37,9 @@ export default class Block extends Component {
 				if (taskObjName === taskName) {
 					taskObj[taskName].map(subTaskObj => {
 						if (subTaskObj.subTask === subTaskName) {
+							if (!subTaskObj[modeName]) { // if no mode create it; e.g day=[] || month=[]
+								subTaskObj[modeName] = []
+							}
 							// toggler: if there is no day => add it; if there is the day => remove it
 							if (!subTaskObj[modeName].includes(text)) { // e.g subTaskObj[modeName]: ["sun", "tue", "mon"]
 								subTaskObj[modeName].push(text)

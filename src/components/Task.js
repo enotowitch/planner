@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import Input from "./Input"
 import { Context } from "../context"
 import SubTask from "./SubTask"
+import Icon from "./Icon"
+import save from "../functions/save"
 
 export default class Task extends Component {
 
@@ -13,6 +15,33 @@ export default class Task extends Component {
 
 	setTaskState = (stateName, newValue) => this.setState({ [stateName]: newValue })
 
+	addSubTask = () => {
+
+		const { tasks, setAppState } = this.context
+		const { taskName } = this.props
+
+		const subTaskArr = []
+
+		tasks.map(taskObj => {
+			const task = taskObj[taskName] // e.g [ { "subTask": "pull ups", "mode": "off", "week": [], "month": [], "type": "input" }, { "subTask": "push ups", "mode": "off", "week": [], "month": [], "type": "input" } ]
+			task && task.map(subTaskObj => subTaskArr.push(subTaskObj.subTask))
+		})
+
+		if (!subTaskArr.includes("")) { // prevent adding void subTask (one allowed)
+			tasks.map(taskObj => {
+				const task = taskObj[taskName]
+				task && task.push(
+					{ "subTask": "", "mode": "off", "week": [], "month": [], "type": "input" }
+				)
+			})
+		}
+
+		save("tasks", tasks)
+		setAppState("tasks", tasks)
+	}
+
+
+	// ! RENDER
 	render() {
 
 		const { taskName } = this.state
@@ -31,9 +60,11 @@ export default class Task extends Component {
 		return (
 			<>
 				<div className="Task mt">
-					<Input role="taskName" type="text" className="Input Task__title" value={taskName} oldValue={taskName} setTaskState={setTaskState} />
+					<Input role="taskName" className="Input Task__title" value={taskName} oldValue={taskName} setTaskState={setTaskState} />
 					<div>
 						{subTasks}
+
+						<Icon src="addSmall" onClick={this.addSubTask} className="ml mt" />
 					</div>
 				</div>
 			</>

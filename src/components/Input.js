@@ -22,7 +22,7 @@ export default class Input extends Component {
 		// save to localStorage & state
 		const { name, id, value, type, checked, role } = e.target
 		const { colors, setAppState, tasks } = this.context
-		const { color, colorName, day, subTaskName, oldValue, setTaskState } = this.props
+		const { color, colorName, day, subTaskName, oldValue, setTaskState, taskName, setSubTaskState } = this.props
 
 		// ! ROLE COLOR
 		// ! type text
@@ -58,9 +58,13 @@ export default class Input extends Component {
 		// ? ROLE SUBTASK
 
 		// ! ROLE TASKNAME
-		if (type === "text" && role === "taskName") {
+		if (role === "taskName") {
 			tasks.map(taskObj => {
 				const taskObjName = String(Object.keys(taskObj))
+
+				if (taskObjName === value) {
+					throw new Error("2 tasks have same name") // prevent task dups
+				}
 
 				if (taskObjName === oldValue) {
 					// RENAME TASK (taskObj)
@@ -71,6 +75,32 @@ export default class Input extends Component {
 			})
 		}
 		// ? ROLE TASKNAME
+
+		// ! ROLE SUBtaskNAME
+		if (role === "subTaskName") {
+			tasks.map(taskObj => {
+				const taskObjName = String(Object.keys(taskObj))
+
+				if (taskObjName === taskName) {
+					const task = taskObj[taskObjName] // e.g [ { "subTask": "pull ups", "mode": "off", "week": [], "month": [], "type": "input" }, { "subTask": "push ups", "mode": "off", "week": [], "month": [], "type": "input" } ]
+					task.map(subTaskObj => {
+						const subTaskName = subTaskObj.subTask
+
+						if (subTaskName === value) {
+							throw new Error("2 subTasks have same name") // prevent subTasks dups
+						}
+
+						if (subTaskName === oldValue) {
+							// RENAME SUBTASK (subTaskObj)
+							delete Object.assign(subTaskObj, { subTask: value })
+							save("tasks", tasks)
+							setSubTaskState("subTaskName", value)
+						}
+					})
+				}
+			})
+		}
+		// ? ROLE SUBtaskNAME
 	}
 
 	onClick = (e) => {
