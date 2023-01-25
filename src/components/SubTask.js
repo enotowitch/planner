@@ -20,7 +20,7 @@ export default class SubTask extends Component {
 
 		return (
 			<div className="fcc SubTask">
-				<SubTaskType />
+				<SubTaskType subTaskName={subTaskName} taskName={taskName} />
 				<Input role="subTaskName" className="Input SubTask__title" value={subTaskName} oldValue={subTaskName} taskName={taskName} setSubTaskState={setSubTaskState} />
 				<SubTaskModes subTaskName={subTaskName} taskName={taskName} />
 			</div>

@@ -65,8 +65,8 @@ export default class SubTaskModes extends Component {
 			const taskObjName = String(Object.keys(taskObj))
 
 			if (taskObjName === taskName) {
-				const task = taskObj[taskName] // e.g [ { "subTask": "pull ups", "mode": "week", "week": [], "month": [], "type": "input" }, { "subTask": "push ups", "mode": "week", "week": [], "month": [], "type": "input" } ]
-				
+				const task = taskObj[taskName] // e.g [ { "subTask": "pull ups", "mode": "week", "week": [], "month": [], "type": "text" }, { "subTask": "push ups", "mode": "week", "week": [], "month": [], "type": "text" } ]
+
 				task.map((subTaskObj, ind) => {
 					if (subTaskObj.subTask === subTaskName) {
 						task.splice(ind, 1)

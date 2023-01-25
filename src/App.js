@@ -47,8 +47,8 @@ class App extends Component {
 					{
 						exersize:
 							[
-								{ subTask: "pull ups", mode: "off", week: [], month: [], type: "input" },
-								{ subTask: "push ups", mode: "off", week: [], month: [], type: "input" }
+								{ subTask: "pull ups", mode: "off", week: [], month: [], type: "text" },
+								{ subTask: "push ups", mode: "off", week: [], month: [], type: "text" }
 							]
 					},
 					{

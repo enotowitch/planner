@@ -23,7 +23,7 @@ export default class TasksAndSubTasks extends Component {
 			tasks.push({
 				"":
 					[
-						{ subTask: "", mode: "off", week: [], month: [], type: "input" },
+						{ subTask: "", mode: "off", week: [], month: [], type: "text" },
 					]
 			},)
 		}

@@ -15,8 +15,9 @@ export default class DayItem extends Component {
 		const { subTaskName, type, day, setDayState, place } = this.props // e.g subTaskName: 'pull ups', type: 'input', day: 'Jan 24'
 
 		const subTask = getDay(day) && getDay(day)["subTasks"] && getDay(day)["subTasks"][subTaskName] // e.g {"color": "#a3ffbf","colorName": "success","value": "15 15 15"}
-		const subTaskValue = subTask && subTask.value // e.g "15 15 15"
+		const subTaskValue = subTask && subTask[type] // e.g subTask: {text: '111', checkbox: true} => type comes from props
 		const subTaskColorName = subTask && subTask.colorName // e.g "success"
+
 		let color
 		if (getCookie("colorMemo")) { // keep old colors even if they changed
 			color = subTask && subTask.color
@@ -26,7 +27,7 @@ export default class DayItem extends Component {
 
 		return (
 			<div className="DayItem" style={{ background: color }}>
-				{type === "input" && <TextAndInput text={subTaskName} role="subTask" subTaskValue={subTaskValue} day={day} />}
+				{type === "text" && <TextAndInput text={subTaskName} role="subTask" subTaskValue={subTaskValue} day={day} />}
 				{type === "checkbox" && <CheckboxAndText text={subTaskName} role="subTask" subTaskValue={subTaskValue} day={day} />}
 				<Mark title={subTaskName} setDayState={setDayState} place={place} />
 			</div>

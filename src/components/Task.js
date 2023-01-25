@@ -23,7 +23,7 @@ export default class Task extends Component {
 		const subTaskArr = []
 
 		tasks.map(taskObj => {
-			const task = taskObj[taskName] // e.g [ { "subTask": "pull ups", "mode": "off", "week": [], "month": [], "type": "input" }, { "subTask": "push ups", "mode": "off", "week": [], "month": [], "type": "input" } ]
+			const task = taskObj[taskName] // e.g [ { "subTask": "pull ups", "mode": "off", "week": [], "month": [], "type": "text" }, { "subTask": "push ups", "mode": "off", "week": [], "month": [], "type": "text" } ]
 			task && task.map(subTaskObj => subTaskArr.push(subTaskObj.subTask))
 		})
 
@@ -31,7 +31,7 @@ export default class Task extends Component {
 			tasks.map(taskObj => {
 				const task = taskObj[taskName]
 				task && task.push(
-					{ "subTask": "", "mode": "off", "week": [], "month": [], "type": "input" }
+					{ "subTask": "", "mode": "off", "week": [], "month": [], "type": "text" }
 				)
 			})
 		}
@@ -71,8 +71,8 @@ export default class Task extends Component {
 			return thisObjTaskName === taskName && taskObj[taskName].map(subTaskObj => {
 				const { subTask } = subTaskObj
 				return <SubTask subTaskName={subTask} taskName={taskName} />
-			}) // e.g subTaskObj = { "subTask": "pull ups", "mode": "weekDay", "weekDay": [ "tue", "sat", "sun" ], "type": "input" }
-		}) // e.g taskObj = { "exersize": [ { "subTask": "pull ups", "mode": "weekDay", "weekDay": [ "tue", "sat", "sun" ], "type": "input" }, { "subTask": "push ups", "mode": "weekDay", "weekDay": [ "wed", "mon", "sun" ], "type": "input" } ] }
+			}) // e.g subTaskObj = { "subTask": "pull ups", "mode": "weekDay", "weekDay": [ "tue", "sat", "sun" ], "type": "text" }
+		}) // e.g taskObj = { "exersize": [ { "subTask": "pull ups", "mode": "weekDay", "weekDay": [ "tue", "sat", "sun" ], "type": "text" }, { "subTask": "push ups", "mode": "weekDay", "weekDay": [ "wed", "mon", "sun" ], "type": "text" } ] }
 
 
 		// ! RETURN

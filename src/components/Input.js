@@ -47,12 +47,12 @@ export default class Input extends Component {
 		const oldSubTask = oldDay && oldDay.subTasks && oldDay.subTasks[subTaskName]
 		// ! type text
 		if (type === "text" && role === "subTask") {
-			save(day, { ...oldDay, day, subTasks: { ...oldSubTasks, [subTaskName]: { ...oldSubTask, value: value } } })
+			save(day, { ...oldDay, day, subTasks: { ...oldSubTasks, [subTaskName]: { ...oldSubTask, text: value } } })
 		}
 		// ? type text
 		// ! type checkbox
 		if (type === "checkbox" && role === "subTask") {
-			save(day, { ...oldDay, day, subTasks: { ...oldSubTasks, [subTaskName]: { ...oldSubTask, value: checked } } })
+			save(day, { ...oldDay, day, subTasks: { ...oldSubTasks, [subTaskName]: { ...oldSubTask, checkbox: checked } } })
 		}
 		// ? type checkbox
 		// ? ROLE SUBTASK
@@ -82,7 +82,7 @@ export default class Input extends Component {
 				const taskObjName = String(Object.keys(taskObj))
 
 				if (taskObjName === taskName) {
-					const task = taskObj[taskObjName] // e.g [ { "subTask": "pull ups", "mode": "off", "week": [], "month": [], "type": "input" }, { "subTask": "push ups", "mode": "off", "week": [], "month": [], "type": "input" } ]
+					const task = taskObj[taskObjName] // e.g [ { "subTask": "pull ups", "mode": "off", "week": [], "month": [], "type": "text" }, { "subTask": "push ups", "mode": "off", "week": [], "month": [], "type": "text" } ]
 					task.map(subTaskObj => {
 						const subTaskName = subTaskObj.subTask
 
