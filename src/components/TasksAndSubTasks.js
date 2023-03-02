@@ -36,7 +36,7 @@ export default class TasksAndSubTasks extends Component {
 
 		const tasks = this.context.tasks.map(taskObj => {
 			const taskName = String(Object.keys(taskObj))
-			return <Task taskName={taskName} />
+			return <Task key={Math.random()} taskName={taskName} />
 		})
 
 		return (

@@ -12,6 +12,12 @@
 }
 }
 
+$contentWidth: 400px;
+
+.InputsAndColors, .Task, .Menu__top{
+	max-width: $contentWidth;
+	margin: 0 auto;
+}
 
 .Text{
 	white-space: nowrap;
@@ -55,12 +61,15 @@
 		min-height: 100%;
 	}
 }
-.InputsAndColors{
-	max-width: 400px;
-	margin: 0 auto;
-}
-.Menu .InputsAndColors{
-	padding: 0 15px;
+.Menu{
+	&__block{
+		width: 100%;
+		border: 2px solid red;
+		text-align: center;
+	}
+	.InputsAndColors{
+		padding: 0 15px;
+	}
 }
 .OnOff{
 	position: relative;

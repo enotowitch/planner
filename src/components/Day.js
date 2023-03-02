@@ -69,18 +69,18 @@ export default class Day extends Component {
 		const dayNum = Number(day.match(/\d+/)[0])
 		const monthName = getMonthName(monthNum)
 
-		const dayItems = subTasks.map(subTaskObj => {
+		const dayItems = subTasks.map((subTaskObj) => {
 			if (subTaskObj.mode === "week") {
-				return subTaskObj.week.includes(weekDay) && <DayItem subTaskName={subTaskObj.subTask} type={subTaskObj.type} day={day} setDayState={setDayState} place="dayItem" />
+				return subTaskObj.week.includes(weekDay) && <DayItem key={Math.random()} subTaskName={subTaskObj.subTask} type={subTaskObj.type} day={day} setDayState={setDayState} place="dayItem" />
 			}
 			if (subTaskObj.mode === "month") {
-				return subTaskObj.month.includes(dayNum) && <DayItem subTaskName={subTaskObj.subTask} type={subTaskObj.type} day={day} setDayState={setDayState} place="dayItem" />
+				return subTaskObj.month.includes(dayNum) && <DayItem key={Math.random()} subTaskName={subTaskObj.subTask} type={subTaskObj.type} day={day} setDayState={setDayState} place="dayItem" />
 			}
 			if (subTaskObj.mode === "day") {
-				return subTaskObj.day.includes(day) && <DayItem subTaskName={subTaskObj.subTask} type={subTaskObj.type} day={day} setDayState={setDayState} place="dayItem" />
+				return subTaskObj.day.includes(day) && <DayItem key={Math.random()} subTaskName={subTaskObj.subTask} type={subTaskObj.type} day={day} setDayState={setDayState} place="dayItem" />
 			}
 			if (subTaskObj.mode === "interval") {
-				return subTaskObj.interval && subTaskObj.interval[year] && subTaskObj.interval[year][monthName] && subTaskObj.interval[year][monthName].map(intervalDayNum => intervalDayNum === dayNum && <DayItem subTaskName={subTaskObj.subTask} type={subTaskObj.type} day={day} setDayState={setDayState} place="dayItem" />)
+				return subTaskObj.interval && subTaskObj.interval[year] && subTaskObj.interval[year][monthName] && subTaskObj.interval[year][monthName].map(intervalDayNum => intervalDayNum === dayNum && <DayItem key={Math.random()} subTaskName={subTaskObj.subTask} type={subTaskObj.type} day={day} setDayState={setDayState} place="dayItem" />)
 			}
 		})
 		// ? weekDay, dayItems, dayNum, monthName

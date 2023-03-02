@@ -11,29 +11,36 @@ export default class TaskAndMonth extends Component {
 
 	// ! toggle month & year
 	prevFn = (stateName) => {
+		const { monthNum, setAppState, year, taskNum } = this.context
+
 		if (stateName === "monthNum") {
-			if (this.context.monthNum === 0) {
-				this.context.setAppState("year", this.context.year - 1)
-				this.context.setAppState("monthNum", 11)
+			if (monthNum === 0) {
+				setAppState("year", year - 1)
+				setAppState("monthNum", 11)
 			} else {
-				this.context.setAppState(stateName, this.context[stateName] - 1)
+				setAppState("monthNum", monthNum - 1)
 			}
-		} else {
-			// stateName: taskNum
-			this.context.setAppState(stateName, this.context[stateName] - 1)
+		}
+		if (stateName === "taskNum") {
+			if (taskNum !== 0) {
+				setAppState("taskNum", taskNum - 1)
+			}
 		}
 	}
 	nextFn = (stateName) => {
+		const { monthNum, setAppState, year, taskNum, tasks } = this.context
+
 		if (stateName === "monthNum") {
-			if (this.context.monthNum === 11) {
-				this.context.setAppState("year", this.context.year + 1)
-				this.context.setAppState("monthNum", 0)
+			if (monthNum === 11) {
+				setAppState("year", year + 1)
+				setAppState("monthNum", 0)
 			} else {
-				this.context.setAppState(stateName, this.context[stateName] + 1)
+				setAppState("monthNum", monthNum + 1)
 			}
-		} else {
-			// stateName: taskNum
-			this.context.setAppState(stateName, this.context[stateName] + 1)
+		}
+		if (stateName === "taskNum") {
+			if (taskNum !== tasks.length - 1)
+				setAppState("taskNum", taskNum + 1)
 		}
 	}
 	// ? toggle month & year

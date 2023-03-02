@@ -1,40 +1,44 @@
 import React, { Component } from "react"
-import InputsAndColors from "./InputsAndColors"
 import { Context } from "../context"
-import Icon from "./Icon"
-import save from "../functions/save"
-import OnOff from "./OnOff"
 import TasksAndSubTasks from "./TasksAndSubTasks"
 import MarksAndColors from "./MarksAndColors"
+import OnOff from "./OnOff"
 
 export default class Menu extends Component {
 
 	static contextType = Context
 
-	addColor = () => {
-		const { colors, setAppState } = this.context
-
-		const lastId = Number(colors[colors.length - 1].id)
-
-		save("colors", [...colors, { id: lastId + 1, colorName: "", color: "#ffffff" }], setAppState)
+	state = {
+		on: { 0: true, 1: false, 2: false }
 	}
+
+	setOn = (id) => this.setState({ on: { 0: false, 1: false, 2: false, [id]: true } })
 
 	render() {
 
 		const { menuOn } = this.context
-		const { addColor } = this
+		const { on } = this.state
+		const { setOn } = this
+
 
 		return (
 			<>
 				{menuOn &&
 					<>
 						<div className="Menu">
-							<TasksAndSubTasks />
 
-							<MarksAndColors />
+							<div className="Menu__top f">
+								<div className="Menu__block" onClick={() => setOn(0)}>Tasks</div>
+								<div className="Menu__block" onClick={() => setOn(1)}>Colors</div>
+								<div className="Menu__block" onClick={() => setOn(2)}>Settings</div>
+							</div>
+
+							{on[0] && <TasksAndSubTasks />}
+
+							{on[1] && <MarksAndColors />}
+
+							{on[2] && <OnOff text="COLOR MEMO" />}
 						</div>
-
-						<Icon src="add" onClick={addColor} className="c mt" />
 					</>
 				}
 

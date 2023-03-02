@@ -71,7 +71,7 @@ export default class SubTaskModes extends Component {
 					if (subTaskObj.subTask === subTaskName) {
 						task.splice(ind, 1)
 						save("tasks", tasks, setAppState)
-						window.location.reload() // todo
+						// window.location.reload() // todo
 					}
 				})
 			}
@@ -85,9 +85,9 @@ export default class SubTaskModes extends Component {
 		const { day, counter } = this.state
 		const { chosen, setOn, addCounter, setSubTaskModesState } = this
 
-		const weekDays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"].map(weekDay => <Block text={weekDay} modeName="week" subTaskName={subTaskName} taskName={taskName} chosen={chosen("week")} />)
-		const monthDays = Array.from({ length: 31 }, (v, k) => k + 1).map(monthDay => <Block text={monthDay} modeName="month" subTaskName={subTaskName} taskName={taskName} chosen={chosen("month")} />)
-		const days = day && day.map(egMar9 => <SelectDay selectMode="read" text={egMar9} modeName="day" subTaskName={subTaskName} taskName={taskName} setSubTaskModesState={setSubTaskModesState} />)
+		const weekDays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"].map(weekDay => <Block key={Math.random()} text={weekDay} modeName="week" subTaskName={subTaskName} taskName={taskName} chosen={chosen("week")} />)
+		const monthDays = Array.from({ length: 31 }, (v, k) => k + 1).map(monthDay => <Block key={Math.random()} text={monthDay} modeName="month" subTaskName={subTaskName} taskName={taskName} chosen={chosen("month")} />)
+		const days = day && day.map(egMar9 => <SelectDay key={Math.random()} selectMode="read" text={egMar9} modeName="day" subTaskName={subTaskName} taskName={taskName} setSubTaskModesState={setSubTaskModesState} />)
 
 
 		// ! RETURN

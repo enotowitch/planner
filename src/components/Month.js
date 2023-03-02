@@ -12,7 +12,7 @@ export default class Month extends Component {
 		const { task, taskName } = this.props
 		const { monthNum } = this.context
 
-		const days = listOfMonths[monthNum].map(egJan9 => <Day day={egJan9} subTasks={task[taskName]} taskName={taskName} />)
+		const days = listOfMonths[monthNum].map(egJan9 => <Day key={Math.random()} day={egJan9} subTasks={task[taskName]} taskName={taskName} />)
 
 		return (
 			<>

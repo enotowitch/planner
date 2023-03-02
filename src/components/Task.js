@@ -54,7 +54,7 @@ export default class Task extends Component {
 			if (taskObjName === taskName) {
 				tasks.splice(ind, 1)
 				save("tasks", tasks, setAppState)
-				window.location.reload() // todo
+				// window.location.reload() // todo
 			}
 		})
 	}
@@ -70,7 +70,7 @@ export default class Task extends Component {
 			const thisObjTaskName = String(Object.keys(taskObj))
 			return thisObjTaskName === taskName && taskObj[taskName].map(subTaskObj => {
 				const { subTask, type } = subTaskObj
-				return <SubTask subTaskName={subTask} taskName={taskName} type={type} />
+				return <SubTask key={Math.random()} subTaskName={subTask} taskName={taskName} type={type} />
 			}) // e.g subTaskObj = { "subTask": "pull ups", "mode": "weekDay", "weekDay": [ "tue", "sat", "sun" ], "type": "text" }
 		}) // e.g taskObj = { "exersize": [ { "subTask": "pull ups", "mode": "weekDay", "weekDay": [ "tue", "sat", "sun" ], "type": "text" }, { "subTask": "push ups", "mode": "weekDay", "weekDay": [ "wed", "mon", "sun" ], "type": "text" } ] }
 

@@ -11,11 +11,11 @@ export default class InputsAndColors extends Component {
 		const { readOnly, day, setDayState, place } = this.props
 		const { colors } = this.context // [{…}, {…}]
 
-		const inputAndColor = colors && colors.map(colorObj => <InputAndColor id={colorObj.id} colorName={colorObj.colorName} color={colorObj.color} readOnly={readOnly} day={day} setDayState={setDayState} place={place} />)
+		const inputAndColor = colors && colors.map(colorObj => <InputAndColor key={colorObj.id} id={colorObj.id} colorName={colorObj.colorName} color={colorObj.color} readOnly={readOnly} day={day} setDayState={setDayState} place={place} />)
 
 
 		return (
-			<div className="InputsAndColors">
+			<div className="InputsAndColors mt">
 				{inputAndColor}
 			</div>
 		)
