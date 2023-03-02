@@ -104,6 +104,11 @@ export default class Input extends Component {
 	}
 
 	onClick = (e) => {
+		// in .Day__options type="color" onClick skip `color-picking`
+		if(e.target.type === "color" && e.target.readOnly){
+			e.preventDefault()
+		}
+
 		const { day, color, colorName, setDayState, place } = this.props
 		const { year } = this.context
 
@@ -146,7 +151,7 @@ export default class Input extends Component {
 						value={type === "text" && colorName || type === "color" && color || value}
 						onChange={(e) => this.onChange(e)}
 						readOnly={readOnly}
-						disabled={type === "color" && readOnly && true}
+						// disabled={type === "color" && readOnly && true}
 						name={colorName || color}
 						id={id}
 						role={role}

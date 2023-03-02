@@ -27,9 +27,11 @@ export default class DayItem extends Component {
 		}
 
 		return (
-			<div className="DayItem" style={{ background: color }}>
-				{type === "text" && <TextAndInput text={subTaskName} role="subTask" subTaskValue={subTaskValue} day={day} />}
-				{type === "checkbox" && <CheckboxAndText text={subTaskName} role="subTask" subTaskValue={subTaskValue} day={day} />}
+			<div className="DayItem__wrap">
+				<div className="DayItem" style={{ background: color }}>
+					{type === "text" && <TextAndInput text={subTaskName} role="subTask" subTaskValue={subTaskValue} day={day} />}
+					{type === "checkbox" && <CheckboxAndText text={subTaskName} role="subTask" subTaskValue={subTaskValue} day={day} />}
+				</div>
 				<Mark title={subTaskName} setDayState={setDayState} place={place} />
 			</div>
 		)

@@ -1,0 +1,45 @@
+// ! ALL `VHS`
+@media (max-width:700px) {
+
+$fontSize: 3vh;
+$fontSizeBig: 3.5vh;
+
+* {
+	font-size: $fontSize;
+}
+	// ! Task
+	.Task__title, .Toggler__title{
+		font-size: $fontSizeBig;
+	}
+	// ! SubTask
+	.SubTask{
+		// !!
+		img:not(.delST){
+			height: $fontSizeBig;
+		}
+	}
+}
+
+// !! > 700
+
+@media (min-width:701px) {
+	$fontSize: 2.5vh;
+	$fontSizeBig: 3vh;
+
+	* {
+		font-size: $fontSize;
+	}
+	// ! Task
+	.Task{
+		&__title{
+			font-size: $fontSizeBig;
+		}
+	}
+	// ! SubTask
+	.SubTask{
+		// !!
+		img:not(.delST){
+			height: $fontSizeBig;
+		}
+	}
+}

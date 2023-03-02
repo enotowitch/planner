@@ -121,7 +121,7 @@ export default class SubTaskModes extends Component {
 				</Mode>
 
 				{/* show "delete subTask" only when mode children are off */}
-				{counter % 2 === 0 && <Icon src="close" onClick={this.deleteSubTask} className="ml mr" />}
+				{counter % 2 === 0 && <Icon src="close" onClick={this.deleteSubTask} className="ml mr delST" />}
 			</div>
 		)
 	}

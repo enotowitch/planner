@@ -1,3 +1,12 @@
+$contentWidth: 700px;
+$black: #000;
+$white: #fff;
+$gray: gray;
+$chosen: pink;
+$brand: #bff2ff;
+$fontMain: Roboto;
+$fontSecond: Montserrat;
+
 * {
 	box-sizing: border-box;
   	margin: 0;
@@ -8,11 +17,23 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   :disabled{
-	color: black;
+	color: $black;
 }
 }
 
-$contentWidth: 400px;
+// ! GLOBAL
+input[type="text"]{
+	// !!
+	margin-left: auto;
+	min-width: 50px;
+}
+input[type="checkbox"]{
+	margin-right: 5px;
+	min-width: 20px;
+	min-height: 20px;
+}
+// ? GLOBAL
+
 
 .InputsAndColors, .Task, .Menu__top{
 	max-width: $contentWidth;
@@ -21,29 +42,48 @@ $contentWidth: 400px;
 
 .Text{
 	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: clip;
-	width: 50%;
+	font-family: $fontSecond;
+	font-style: italic;
+	font-weight: 700;
+	// width: 50%;
 }
 .Input{
 	border: none;
-	border-bottom: 1px solid black;
-	width: 75%;
+	border-bottom: 1px solid $black;
+	// width: 75%;
 	background: transparent;
 	&_color{
 		width: 25%;
 	}
 }
 .DayItem{
-	border-bottom: 2px solid gray;
-	padding: 2px 8px;
+	border-bottom: 2px solid $gray;
 	display: flex;
+	flex-wrap: wrap;
+	border: 1px solid $gray;
+	overflow: hidden;
+	padding-left: 25px !important; // * so rate star can fit
+	padding: 8px;
+	// !!
+	input[type="text"]{
+		// min-width: 50%;
+		// max-width: 100%;
+		width: 100%;
+	}
+	&__wrap{
+		position: relative;
+		// !! rate star
+		img {
+			position: absolute;
+			left: 8px;
+			top: 16px;
+		}
+	}
 }
 .Day{
 	position: relative;
 	display: inline-block;
-	border-top: 3px solid black;
-	border-right: 3px solid black;
+	outline: auto $black;
 	overflow: auto;
 	&__top {
 		display: flex;
@@ -54,10 +94,24 @@ $contentWidth: 400px;
 		position: absolute;
 		top: 0;
 		left: 0;
-		background: gray;
+		background: $white;
 		padding-top: 20px;
 		min-height: 100%;
+		width: 100%;
+		// !!
+		input{
+			width: 50%;
+		}
 	}
+	&__title{
+		white-space: nowrap;
+	}
+}
+.days{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
 }
 .Menu{
 	&__block{
@@ -74,7 +128,7 @@ $contentWidth: 400px;
 	width: 60px;
 	height: 29px;
 	border-radius: 20px;
-	border: 2px solid rgb(78, 78, 78);
+	border: 2px solid $gray;
 	span{
 		position: absolute;
 		display: inline-block;
@@ -84,18 +138,37 @@ $contentWidth: 400px;
 	}
 }
 .Block{
-	border: 1px solid black;
+	border: 1px solid $black;
 	white-space: nowrap;
 	padding: 0 2px;
 }
 .SubTask{
 	overflow: scroll;
 }
+.Task{
+	&__title{
+		max-width: 70%;
+		font-weight: 700;
+	}
+}
 .Modes{
 	min-width: 160px;
 }
 .chosen{
-	background: pink;
+	background: $chosen;
+}
+.Toggler{
+	&__title{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-family: Montserrat;
+		margin: 15px 0;
+		// !!
+		img{
+			width: 28px;
+		}
+	}
 }
 
 // ! BURGER
@@ -112,7 +185,7 @@ $contentWidth: 400px;
  .burger-icon span {
 	width: 5px;
 	height: 5px;
-	background-color: #000;
+	background-color: $black;
 	display: block;
 	border-radius: 50%;
 	position: absolute;
@@ -187,6 +260,27 @@ $contentWidth: 400px;
  } 
 // ? BURGER
 
+// ! scrollbar
+// body
+body::-webkit-scrollbar {
+	width: 1vw;
+	height: 10px;
+}
+// other
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+::-webkit-scrollbar-thumb {
+	background: $brand;
+	border-radius: 20px;
+}
+::-webkit-scrollbar-track {
+	background: $white;
+	border-radius: 20px;
+}
+// ? scrollbar
+
 // ! OTHER
 // flex center center
 .fcc{
@@ -219,4 +313,7 @@ $contentWidth: 400px;
 }
 .f{
 	display: flex;
+}
+.br{
+	border: 2px solid red;
 }

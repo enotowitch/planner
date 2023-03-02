@@ -8,7 +8,7 @@ export default class TogglerPrevNext extends Component {
 		const { title, prevFn, nextFn } = this.props
 
 		return (
-			<div className="fcc mb">
+			<div className="Toggler__title">
 				<Icon src="prev" onClick={prevFn} />
 				{title}
 				<Icon src="next" onClick={nextFn} />

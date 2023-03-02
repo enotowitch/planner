@@ -53,7 +53,7 @@ export default class Month extends Component {
 					</select>
 				</label>
 
-				<div>
+				<div className="days">
 					{days}
 				</div>
 			</>
