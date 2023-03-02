@@ -1,8 +1,8 @@
-export default (day, prop) => {
+export default (day, year) => {
 	let result
-	if (localStorage.getItem(day)) {
-		prop && (result = JSON.parse(localStorage.getItem(day))[prop])
-		!prop && (result = JSON.parse(localStorage.getItem(day)))
+	const DAY = day + " " + year
+	if (localStorage.getItem(DAY)) {
+		result = JSON.parse(localStorage.getItem(DAY))
 	}
 	return result
 }

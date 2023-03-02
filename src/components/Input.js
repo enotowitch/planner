@@ -21,10 +21,10 @@ export default class Input extends Component {
 
 		// save to localStorage & state
 		const { name, id, value, type, checked, role } = e.target
-		const { colors, setAppState, tasks } = this.context
+		const { colors, setAppState, tasks, year } = this.context
 		const { color, colorName, day, subTaskName, oldValue, setTaskState, taskName, setSubTaskState } = this.props
 
-		// ! ROLE COLOR
+		// !! ROLE COLOR
 		// ! type text
 		if (type === "text" && role === "color") {
 			const withoutDeletedColor = colors.filter(colorObj => colorObj.colorName !== name && colorObj.colorName) // delete prev colorName and void colorName
@@ -39,25 +39,25 @@ export default class Input extends Component {
 			save("colors", newColors, setAppState)
 		}
 		// ? type color
-		// ? ROLE COLOR
+		// ?? ROLE COLOR
 
-		// ! ROLE SUBTASK
-		const oldDay = getDay(day) // e.g { "day": "Jan 12", "exersize": "#ffd561" }
+		// !! ROLE SUBTASK
+		const oldDay = getDay(day, year) // e.g { "day": "Jan 12", "exersize": "#ffd561" }
 		const oldSubTasks = oldDay && oldDay.subTasks
 		const oldSubTask = oldDay && oldDay.subTasks && oldDay.subTasks[subTaskName]
 		// ! type text
 		if (type === "text" && role === "subTask") {
-			save(day, { ...oldDay, day, subTasks: { ...oldSubTasks, [subTaskName]: { ...oldSubTask, text: value } } })
+			save(`${day} ${year}`, { ...oldDay, day, year, subTasks: { ...oldSubTasks, [subTaskName]: { ...oldSubTask, text: value } } })
 		}
 		// ? type text
 		// ! type checkbox
 		if (type === "checkbox" && role === "subTask") {
-			save(day, { ...oldDay, day, subTasks: { ...oldSubTasks, [subTaskName]: { ...oldSubTask, checkbox: checked } } })
+			save(`${day} ${year}`, { ...oldDay, day, year, subTasks: { ...oldSubTasks, [subTaskName]: { ...oldSubTask, checkbox: checked } } })
 		}
 		// ? type checkbox
-		// ? ROLE SUBTASK
+		// ?? ROLE SUBTASK
 
-		// ! ROLE TASKNAME
+		// !! ROLE TASKNAME
 		if (role === "taskName") {
 			tasks.map(taskObj => {
 				const taskObjName = String(Object.keys(taskObj))
@@ -74,9 +74,9 @@ export default class Input extends Component {
 				}
 			})
 		}
-		// ? ROLE TASKNAME
+		// ?? ROLE TASKNAME
 
-		// ! ROLE SUBtaskNAME
+		// !! ROLE SUBtaskNAME
 		if (role === "subTaskName") {
 			tasks.map(taskObj => {
 				const taskObjName = String(Object.keys(taskObj))
@@ -100,20 +100,21 @@ export default class Input extends Component {
 				}
 			})
 		}
-		// ? ROLE SUBtaskNAME
+		// ?? ROLE SUBtaskNAME
 	}
 
 	onClick = (e) => {
 		const { day, color, colorName, setDayState, place } = this.props
+		const { year } = this.context
 
-		const oldDay = getDay(day) // e.g { "day": "Jan 12", "exersize": "#ffd561" }
+		const oldDay = getDay(day, year) // e.g { "day": "Jan 12", "exersize": "#ffd561" }
 		const closeOptions = () => e.target.closest(".Day__top").querySelector("img").click()
 
 		// ! color day
 		if (place === "day") {
 			const { curTaskName } = this.context
 
-			save(day, { ...oldDay, day, tasks: { [curTaskName]: { color: color, colorName: colorName } } }) // e.g { "day": "Jan 12", "exersize": "#ffd561", "learn": "#008015"}
+			save(`${day} ${year}`, { ...oldDay, day, tasks: { [curTaskName]: { color: color, colorName: colorName } } }) // e.g { "day": "Jan 12", "exersize": "#ffd561", "learn": "#008015"}
 			setDayState("color", color)
 			closeOptions()
 		}
@@ -122,13 +123,14 @@ export default class Input extends Component {
 			const oldSubTasks = oldDay && oldDay.subTasks
 			const oldSubTask = oldDay && oldDay.subTasks && oldDay.subTasks[subTaskName]
 
-			save(day, { ...oldDay, day, subTasks: { ...oldSubTasks, [subTaskName]: { ...oldSubTask, color: color, colorName: colorName } } })
+			save(`${day} ${year}`, { ...oldDay, day, subTasks: { ...oldSubTasks, [subTaskName]: { ...oldSubTask, color: color, colorName: colorName } } })
 			closeOptions()
 		}
 		// ? color day
 	}
 
 
+	// ! RENDER
 	render() {
 
 		const { type, className, colorName, color, readOnly, id, role } = this.props

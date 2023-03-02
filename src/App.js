@@ -16,7 +16,7 @@ class App extends Component {
 		colors: lsData("colors"),
 		tasks: lsData("tasks"),
 		taskNum: 0,
-		monthNum: 0,
+		monthNum: new Date().getMonth(),
 		year: new Date().getFullYear()
 	}
 
@@ -35,6 +35,7 @@ class App extends Component {
 		if (localStorage.length === 0) {
 			save("colors",
 				[
+					{ id: -1, colorName: "no mark", color: "transparent" },
 					{ id: 0, colorName: "success", color: "#87d20c" },
 					{ id: 1, colorName: "so-so", color: "#ffd561" },
 					{ id: 2, colorName: "fail", color: "#ff8c92" },

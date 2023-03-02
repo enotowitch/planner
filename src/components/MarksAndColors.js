@@ -11,7 +11,7 @@ export default class MarksAndColors extends Component {
 	addColor = () => {
 		const { colors, setAppState } = this.context
 
-		const lastId = Number(colors[colors.length - 1].id)
+		const lastId = Number(colors[colors.length - 1]?.id) || 0
 
 		save("colors", [...colors, { id: lastId + 1, colorName: "", color: "#ffffff" }], setAppState)
 	}

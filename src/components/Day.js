@@ -14,7 +14,7 @@ export default class Day extends Component {
 	static contextType = Context
 
 	getColorDayAndTask = () => {
-		const day = getDay(this.props.day) // e.g {day: 'Jan 1', subTasks: {…}, tasks: {…}}
+		const day = getDay(this.props.day, this.context.year) // e.g {day: 'Jan 1', subTasks: {…}, tasks: {…}}
 		const curTask = day && day.tasks && day.tasks[this.context.curTaskName] // e.g {color: '#87d20c', colorName: 'success'}
 		const colorName = day && curTask && curTask.colorName // e.g "success"
 		let color
@@ -34,7 +34,9 @@ export default class Day extends Component {
 		color: this.getColorDayAndTask(),
 		optionOn: false,
 		title: this.getWeekDay(this.props.day),
-		place: "" // day || dayItem => where to change day color or dayItem color
+		place: "", // day || dayItem => where to change day color or dayItem color
+		width: this.props.width,
+		height: this.props.height,
 	}
 
 	setDayState = (stateName, newValue) => this.setState({ [stateName]: newValue })
@@ -60,7 +62,7 @@ export default class Day extends Component {
 	render() {
 
 		const { day, subTasks } = this.props // day = e.g "Jan 23"
-		const { color, optionOn, title, place } = this.state
+		const { color, optionOn, title, place, width, height } = this.state
 		const { year, monthNum } = this.context
 		const { getWeekDay, setDayState } = this
 
@@ -88,7 +90,7 @@ export default class Day extends Component {
 
 		// ! RETURN
 		return (
-			<div className="Day" style={{ background: color }}>
+			<div className="Day" style={{ background: color, width: width + "vw", height: height + "vh" }}>
 				<div className="Day__top">
 					<span>{dayNum}</span>
 					<span className="Day__title zi3">{title}</span>
