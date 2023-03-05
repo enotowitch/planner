@@ -150,17 +150,34 @@ input[type="checkbox"]{
 	border: 1px solid $black;
 	white-space: nowrap;
 	padding: 0 2px;
-	min-width: 40px;
+	min-width: 60px;
 	max-width: max-content;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	padding: 2px;
+	border-radius: 4px;
 }
 .SubTask{
 	overflow: scroll;
 	padding: 10px;
 	padding-top: 10px;
 	margin-left: 15px;
+	align-items: flex-end !important;
+	// !!
+img{
+	align-self: center;
+	&:nth-child(2){
+		margin-right: 5px;
+	}
+}
+}
+.delST{
+	height: 15px !important;
+	align-self: center;
+}
+.delT{
+	height: 20px !important;
 }
 .addSmall{
 	margin-left: 40px;

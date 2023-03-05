@@ -11,13 +11,6 @@ $fontSizeBig: 3.5vh;
 	.Task__title, .Toggler__title{
 		font-size: $fontSizeBig;
 	}
-	// ! SubTask
-	.SubTask{
-		// !!
-		img:not(.delST){
-			height: $fontSizeBig;
-		}
-	}
 }
 
 // !! > 700
@@ -33,13 +26,6 @@ $fontSizeBig: 3.5vh;
 	.Task{
 		&__title{
 			font-size: $fontSizeBig;
-		}
-	}
-	// ! SubTask
-	.SubTask{
-		// !!
-		img:not(.delST){
-			height: $fontSizeBig;
 		}
 	}
 }

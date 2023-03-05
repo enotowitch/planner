@@ -85,7 +85,7 @@ export default class Task extends Component {
 				<div className="Task mt">
 					<Input role="taskName" className="Input Task__title" value={taskName} oldValue={taskName} setTaskState={setTaskState} placeholder="task name" />
 
-					<Icon src="close" onClick={this.deleteTask} className="ml" />
+					<Icon src="close" onClick={this.deleteTask} className="delT" />
 
 					<div>
 						{subTasks}
