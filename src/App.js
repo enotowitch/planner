@@ -29,7 +29,8 @@ class App extends Component {
 
 		// ! DEFAULT
 		// ! cookies
-		!document.cookie.match(/colorMemo/) && setCookie("colorMemo", false)
+		!document.cookie.match(/color memo/) && setCookie("color memo", false)
+		!document.cookie.match(/day hover/) && setCookie("day hover", true)
 		// ? cookies
 		// ! colors
 		if (localStorage.length === 0) {

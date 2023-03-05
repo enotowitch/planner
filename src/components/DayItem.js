@@ -20,7 +20,7 @@ export default class DayItem extends Component {
 		const subTaskColorName = subTask && subTask.colorName // e.g "success"
 
 		let color
-		if (getCookie("colorMemo")) { // keep old colors even if they changed
+		if (getCookie("color memo")) { // keep old colors even if they changed
 			color = subTask && subTask.color
 		} else { // default = false, rerender new colors
 			this.context.colors.map(colorObj => colorObj.colorName === subTaskColorName && (color = colorObj.color))

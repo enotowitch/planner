@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import Day from "./Day"
 import listOfMonths from "../listOfMonths"
 import { Context } from "../context"
+import getCookie from "../functions/getCookie"
 
 export default class Month extends Component {
 
@@ -30,13 +31,17 @@ export default class Month extends Component {
 	}
 
 	componentDidMount() {
-		this.hover()
-		this.unhover()
+		if (getCookie("day hover")) {
+			this.hover()
+			this.unhover()
+		}
 	}
 
 	componentDidUpdate() {
-		this.hover()
-		this.unhover()
+		if (getCookie("day hover")) {
+			this.hover()
+			this.unhover()
+		}
 	}
 
 	// ! RENDER

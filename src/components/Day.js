@@ -19,7 +19,7 @@ export default class Day extends Component {
 		const colorName = day && curTask && curTask.colorName // e.g "success"
 		let color
 
-		if (getCookie("colorMemo")) { // keep old colors even if they changed
+		if (getCookie("color memo")) { // keep old colors even if they changed
 			color = curTask && curTask.color
 		} else { // default = false, rerender new colors
 			this.context.colors.map(colorObj => colorName === colorObj.colorName && (color = colorObj.color))

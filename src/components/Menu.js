@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { Context } from "../context"
 import TasksAndSubTasks from "./TasksAndSubTasks"
 import MarksAndColors from "./MarksAndColors"
-import OnOff from "./OnOff"
+import Settings from "./Settings"
 
 export default class Menu extends Component {
 
@@ -37,7 +37,7 @@ export default class Menu extends Component {
 
 							{on[1] && <MarksAndColors />}
 
-							{on[2] && <OnOff text="COLOR MEMO" />}
+							{on[2] && <Settings />}
 						</div>
 					</>
 				}

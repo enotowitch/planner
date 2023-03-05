@@ -5,7 +5,7 @@ import setCookie from "../functions/setCookie"
 export default class OnOff extends Component {
 
 	state = {
-		on: getCookie("colorMemo")
+		on: getCookie(this.props.text)
 	}
 
 	toggle = () => {
@@ -13,7 +13,7 @@ export default class OnOff extends Component {
 	}
 
 	componentDidUpdate() {
-		setCookie("colorMemo", this.state.on)
+		setCookie(this.props.text, this.state.on)
 	}
 
 
