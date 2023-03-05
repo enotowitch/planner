@@ -12,6 +12,32 @@ export default class Month extends Component {
 		height: 5 // default for mobile
 	}
 
+	hover() {
+		document.querySelectorAll(".Day").forEach(each => each.addEventListener("mouseenter", (e) => {
+			document.querySelectorAll(".Day").forEach(each => each.classList.add("opLow"))
+			e.target.classList.remove("opLow")
+			e.target.classList.add("opHigh")
+		}))
+	}
+
+	unhover() {
+		document.querySelector(".days").addEventListener("mouseleave", () => {
+			document.querySelectorAll(".Day").forEach(each => {
+				each.classList.remove("opLow")
+				each.classList.remove("opHigh")
+			})
+		})
+	}
+
+	componentDidMount() {
+		this.hover()
+		this.unhover()
+	}
+
+	componentDidUpdate() {
+		this.hover()
+		this.unhover()
+	}
 
 	// ! RENDER
 	render() {
