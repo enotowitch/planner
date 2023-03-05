@@ -3,16 +3,22 @@ import Day from "./Day"
 import listOfMonths from "../listOfMonths"
 import { Context } from "../context"
 import getCookie from "../functions/getCookie"
+import DaySize from "./DaySize"
 
 export default class Month extends Component {
 
 	static contextType = Context
 
+	// ! state
 	state = {
-		width: 3, // default for mobile
-		height: 5 // default for mobile
+		width: getCookie("width"), // default for mobile
+		height: getCookie("height") // default for mobile
 	}
 
+	setMonthState = (stateName, newValue) => this.setState({ [stateName]: newValue })
+	// ? state
+
+	// ! hover/unhover
 	hover() {
 		document.querySelectorAll(".Day").forEach(each => each.addEventListener("mouseenter", (e) => {
 			document.querySelectorAll(".Day").forEach(each => each.classList.add("opLow"))
@@ -43,6 +49,8 @@ export default class Month extends Component {
 			this.unhover()
 		}
 	}
+	// ? hover/unhover
+
 
 	// ! RENDER
 	render() {
@@ -50,39 +58,18 @@ export default class Month extends Component {
 		const { task, taskName } = this.props
 		const { monthNum } = this.context
 		const { width, height } = this.state
+		const { setMonthState } = this
 
-		const width_ = 100 / width - 1 // ! set Day width selected
-		const height_ = 100 / height - 1 // ! set Day height selected
+		const width_ = 100 / width // ! set Day width selected
+		const height_ = 100 / height // ! set Day height selected
 
 		const days = listOfMonths[monthNum].map(egJan9 => <Day key={Math.random()} day={egJan9} subTasks={task[taskName]} taskName={taskName} width={width_} height={height_} />)
 
+
+		// ! RETURN
 		return (
 			<>
-				<label>
-					width
-					<select
-						value={width}
-						onChange={(e) => this.setState({ width: e.target.value })}
-					>
-						<option>10</option>
-						<option>5</option>
-						<option>3</option>
-						<option>1</option>
-					</select>
-				</label>
-
-				<label>
-					height
-					<select
-						value={height}
-						onChange={(e) => this.setState({ height: e.target.value })}
-					>
-						<option>10</option>
-						<option>5</option>
-						<option>3</option>
-						<option>1</option>
-					</select>
-				</label>
+				<DaySize width={width} height={height} setMonthState={setMonthState} />
 
 				<div className="days">
 					{days}
