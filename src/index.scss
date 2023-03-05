@@ -59,10 +59,12 @@ border-radius: 4px;
 .Input{
 	border: none;
 	border-bottom: 1px solid $black;
+	margin-top: 5px;
 	// width: 75%;
 	background: transparent;
 	&_color{
 		width: 25%;
+		margin-top: 5px;
 	}
 }
 .DayItem{
