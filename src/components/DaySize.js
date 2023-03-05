@@ -1,5 +1,7 @@
 import React, { Component } from "react"
 import setCookie from "../functions/setCookie"
+import widthImg from "../img/width.svg"
+import heightImg from "../img/height.svg"
 
 export default class DaySize extends Component {
 
@@ -41,9 +43,9 @@ export default class DaySize extends Component {
 
 		// ! RETURN
 		return (
-			<>
-				<label>
-					width
+			<div className="f mt2 mb">
+				<label className="fcc">
+					<img className="ml mr" src={widthImg} />
 					<select
 						value={width}
 						onChange={handleWidth}
@@ -52,8 +54,8 @@ export default class DaySize extends Component {
 					</select>
 				</label>
 
-				<label>
-					height
+				<label className="fcc">
+					<img className="ml mr" src={heightImg} />
 					<select
 						value={height}
 						onChange={handleHeight}
@@ -61,7 +63,7 @@ export default class DaySize extends Component {
 						{options}
 					</select>
 				</label>
-			</>
+			</div>
 		)
 	}
 }

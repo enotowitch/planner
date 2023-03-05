@@ -11,6 +11,11 @@ $fontSizeBig: 3.5vh;
 	.Task__title, .Toggler__title{
 		font-size: $fontSizeBig;
 	}
+	.Toggler__title{
+		&:nth-child(2){
+			font-size: calc($fontSizeBig*1.1);
+		}
+	}
 }
 
 // !! > 700
@@ -23,9 +28,12 @@ $fontSizeBig: 3.5vh;
 		font-size: $fontSize;
 	}
 	// ! Task
-	.Task{
-		&__title{
-			font-size: $fontSizeBig;
+	.Task__title, .Toggler__title{
+		font-size: $fontSizeBig;
+	}
+	.Toggler__title{
+		&:nth-child(2){
+			font-size: calc($fontSizeBig*1.1);
 		}
 	}
 }

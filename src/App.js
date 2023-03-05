@@ -61,27 +61,6 @@ class App extends Component {
 								{ subTask: "js", mode: "off", week: [], month: [], type: "checkbox" },
 								{ subTask: "react", mode: "off", week: [], month: [], type: "checkbox" }
 							]
-					},
-					{
-						read:
-							[
-								{ subTask: "book 1", mode: "off", week: [], month: [], type: "checkbox" },
-								{ subTask: "book 2", mode: "off", week: [], month: [], type: "checkbox" }
-							]
-					},
-					{
-						watch:
-							[
-								{ subTask: "film 1", mode: "off", week: [], month: [], type: "checkbox" },
-								{ subTask: "film 2", mode: "off", week: [], month: [], type: "checkbox" }
-							]
-					},
-					{
-						cook:
-							[
-								{ subTask: "dish 1", mode: "off", week: [], month: [], type: "checkbox" },
-								{ subTask: "dish 2", mode: "off", week: [], month: [], type: "checkbox" }
-							]
 					}
 				])
 			window.location.reload() // make sure all defaults saved

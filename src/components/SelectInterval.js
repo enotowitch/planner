@@ -113,32 +113,38 @@ export default class SelectInterval extends Component {
 		return (
 			<>
 				{/* TODO */}
-				<span>start</span>
-				<select
-					value={start}
-					name="start"
-					onChange={this.onChange}
-				>
-					{days}
-				</select>
+				<label>
+					<i>&nbsp;start&nbsp;</i>
+					<select
+						value={start}
+						name="start"
+						onChange={this.onChange}
+					>
+						{days}
+					</select>
+				</label>
 
-				<span>interval</span>
-				<select
-					value={interval}
-					name="interval"
-					onChange={this.onChange}
-				>
-					{intervals}
-				</select>
+				<label>
+					<i>&nbsp;interval&nbsp;</i>
+					<select
+						value={interval}
+						name="interval"
+						onChange={this.onChange}
+					>
+						{intervals}
+					</select>
+				</label>
 
-				<span>times</span>
-				<select
-					value={times}
-					name="times"
-					onChange={this.onChange}
-				>
-					{timess}
-				</select>
+				<label>
+					<i>&nbsp;times&nbsp;</i>
+					<select
+						value={times}
+						name="times"
+						onChange={this.onChange}
+					>
+						{timess}
+					</select>
+				</label>
 			</>
 		)
 	}

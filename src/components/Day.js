@@ -66,6 +66,13 @@ export default class Day extends Component {
 		const { year, monthNum } = this.context
 		const { getWeekDay, setDayState } = this
 
+		// ! today
+		const appToday = day + " " + year
+		const regExp = /(?:\s)(\w+\s)(?:0|)(\d+\s\d{4})/
+		const realToday = Date().match(regExp)[1] + Date().match(regExp)[2]
+		const isToday = appToday === realToday && <b><i>today</i></b>
+		// ? today
+
 		// ! weekDay, dayItems, dayNum, monthName
 		const weekDay = getWeekDay(day) // sun, mon, tue, ...	
 		const dayNum = Number(day.match(/\d+/)[0])
@@ -90,10 +97,10 @@ export default class Day extends Component {
 
 		// ! RETURN
 		return (
-			<div className="Day" style={{ background: color, width: width + "vw", height: height + "vh" }}>
+			<div className={`Day ${isToday ? "today" : ""}`} style={{ background: color, width: width + "vw", height: height + "vh" }}>
 				<div className="Day__top">
 					<span>{dayNum}</span>
-					<span className="Day__title zi3">{title}</span>
+					<span className="Day__title zi3">{isToday}{!isToday && title}</span>
 
 
 					<>

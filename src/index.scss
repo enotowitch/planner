@@ -1,4 +1,4 @@
-$contentWidth: 700px;
+$contentWidth: 750px;
 $black: #000;
 $white: #fff;
 $gray: gray;
@@ -19,9 +19,15 @@ $fontSecond: Montserrat;
   :disabled{
 	color: $black;
 }
+// !!
+user-select: none;
 }
 
 // ! GLOBAL
+input, textarea {
+	user-select: text;
+}
+
 input[type="text"]{
 	// !!
 	margin-left: auto;
@@ -31,6 +37,9 @@ input[type="checkbox"]{
 	margin-right: 5px;
 	min-width: 20px;
 	min-height: 20px;
+}
+select {
+border-radius: 4px;
 }
 // ? GLOBAL
 
@@ -180,7 +189,7 @@ img{
 	height: 20px !important;
 }
 .addSmall{
-	margin-left: 40px;
+	margin-left: 45px;
 	margin-top: 15px;
 	margin-bottom: 30px;
 	padding: 4px;
@@ -191,6 +200,9 @@ img{
 	padding: 4px 20px;
 	outline: 1px dashed $black;
 	border-radius: 20px;
+}
+.tasks{
+	margin: 0 7px;
 }
 .Task{
 	outline: dashed 1px $black;
@@ -334,6 +346,12 @@ body::-webkit-scrollbar {
 }
 // ? scrollbar
 
+// ! cursor pointer
+select, .Day, img, .Menu__block, .Block, .OnOff{
+cursor: pointer;
+}
+// ? cursor pointer
+
 // ! OTHER
 // flex center center
 .fcc{
@@ -343,6 +361,9 @@ body::-webkit-scrollbar {
 }
 .mt{
 	margin-top: 15px;
+}
+.mt2{
+	margin-top: 30px;
 }
 .mr{
 	margin-right: 15px;

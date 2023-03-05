@@ -41,6 +41,7 @@ export default class Month extends Component {
 			this.hover()
 			this.unhover()
 		}
+		document.querySelector(".today").scrollIntoView()
 	}
 
 	componentDidUpdate() {

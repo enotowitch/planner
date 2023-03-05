@@ -40,11 +40,11 @@ export default class TasksAndSubTasks extends Component {
 		})
 
 		return (
-			<>
+			<div className="tasks">
 				{tasks}
 
 				<Icon src="add" onClick={this.addTask} className="c addBig" />
-			</>
+			</div>
 		)
 	}
 }
