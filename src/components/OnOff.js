@@ -26,8 +26,8 @@ export default class OnOff extends Component {
 			<div className="fcc mt mb" onClick={this.toggle}>
 				<span className="mr">{text}</span>
 				<div className="OnOff">
-					{!on && <span style={{ background: "#fd5c63", left: 0 }}></span>}
-					{on && <span style={{ background: "#4FFFB0", right: 0 }}></span>}
+					{!on && <span style={{ background: "#E9E4D4", left: 0 }}></span>}
+					{on && <span style={{ background: "pink", right: 0 }}></span>}
 				</div>
 			</div>
 		)

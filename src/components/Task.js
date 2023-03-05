@@ -41,22 +41,26 @@ export default class Task extends Component {
 	}
 
 	deleteTask = () => {
+
 		const { tasks, setAppState } = this.context
 		const { taskName } = this.props
 
-		tasks.map((taskObj, ind) => {
-			const taskObjName = String(Object.keys(taskObj))
+		if (window.confirm(`Delete task "${taskName}" ?`)) {
 
-			if (tasks.length === 1) {
-				throw new Error("Last task can not be deleted")
-			}
+			tasks.map((taskObj, ind) => {
+				const taskObjName = String(Object.keys(taskObj))
 
-			if (taskObjName === taskName) {
-				tasks.splice(ind, 1)
-				save("tasks", tasks, setAppState)
-				// window.location.reload() // todo
-			}
-		})
+				if (tasks.length === 1) {
+					throw new Error("Last task can not be deleted")
+				}
+
+				if (taskObjName === taskName) {
+					tasks.splice(ind, 1)
+					save("tasks", tasks, setAppState)
+					// window.location.reload() // todo
+				}
+			})
+		}
 	}
 
 
@@ -79,14 +83,14 @@ export default class Task extends Component {
 		return (
 			<>
 				<div className="Task mt">
-					<Input role="taskName" className="Input Task__title" value={taskName} oldValue={taskName} setTaskState={setTaskState} />
+					<Input role="taskName" className="Input Task__title" value={taskName} oldValue={taskName} setTaskState={setTaskState} placeholder="task name" />
 
 					<Icon src="close" onClick={this.deleteTask} className="ml" />
 
 					<div>
 						{subTasks}
 
-						<Icon src="addSmall" onClick={this.addSubTask} className="ml mt" />
+						<Icon src="addSmall" onClick={this.addSubTask} className="addSmall" />
 					</div>
 				</div>
 			</>

@@ -28,9 +28,9 @@ export default class Menu extends Component {
 						<div className="Menu">
 
 							<div className="Menu__top f">
-								<div className="Menu__block" onClick={() => setOn(0)}>Tasks</div>
-								<div className="Menu__block" onClick={() => setOn(1)}>Colors</div>
-								<div className="Menu__block" onClick={() => setOn(2)}>Settings</div>
+								<div className="Menu__block" onClick={() => setOn(0)} style={{ background: on[0] && "pink" }}>Tasks</div>
+								<div className="Menu__block" onClick={() => setOn(1)} style={{ background: on[1] && "pink" }}>Colors</div>
+								<div className="Menu__block" onClick={() => setOn(2)} style={{ background: on[2] && "pink" }}>Settings</div>
 							</div>
 
 							{on[0] && <TasksAndSubTasks />}

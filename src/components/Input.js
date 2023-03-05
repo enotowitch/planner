@@ -105,7 +105,7 @@ export default class Input extends Component {
 
 	onClick = (e) => {
 		// in .Day__options type="color" onClick skip `color-picking`
-		if(e.target.type === "color" && e.target.readOnly){
+		if (e.target.type === "color" && e.target.readOnly) {
 			e.preventDefault()
 		}
 
@@ -138,9 +138,13 @@ export default class Input extends Component {
 	// ! RENDER
 	render() {
 
-		const { type, className, colorName, color, readOnly, id, role } = this.props
+		let { type, className, colorName, color, readOnly, id, role, placeholder } = this.props
 		const { value, checked } = this.state
 
+		if (color === "transparent") { color = "#ffffff" }
+
+
+		// ! RETURN
 		return (
 			<>
 				{/* type text & color */}
@@ -156,6 +160,7 @@ export default class Input extends Component {
 						id={id}
 						role={role}
 						onClick={(e) => readOnly && this.onClick(e)}
+						placeholder={placeholder}
 					/>
 				}
 				{type === "checkbox" &&

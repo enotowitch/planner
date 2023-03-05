@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import save from "../functions/save"
 import { Context } from "../context"
+import { back } from "../consts"
 
 export default class Block extends Component {
 
@@ -74,7 +75,7 @@ export default class Block extends Component {
 		const color = chosen && chosen.includes(text) && "pink" // e.g chosen : ["sun", "tue", "mon"] ||  chosen : [1, 2, 8, 9, 3]
 
 		return (
-			<div className="Block" onClick={this.blockFn} style={{ background: color }}>
+			<div className="Block" onClick={this.blockFn} style={{ background: color, fontWeight: text === back && 700 }}>
 				{text}
 			</div>
 		)

@@ -61,21 +61,23 @@ export default class SubTaskModes extends Component {
 		const { subTaskName, taskName } = this.props
 		const { tasks, setAppState } = this.context
 
-		tasks.map(taskObj => {
-			const taskObjName = String(Object.keys(taskObj))
+		if (window.confirm(`Delete subtask "${subTaskName}" ?`))
 
-			if (taskObjName === taskName) {
-				const task = taskObj[taskName] // e.g [ { "subTask": "pull ups", "mode": "week", "week": [], "month": [], "type": "text" }, { "subTask": "push ups", "mode": "week", "week": [], "month": [], "type": "text" } ]
+			tasks.map(taskObj => {
+				const taskObjName = String(Object.keys(taskObj))
 
-				task.map((subTaskObj, ind) => {
-					if (subTaskObj.subTask === subTaskName) {
-						task.splice(ind, 1)
-						save("tasks", tasks, setAppState)
-						// window.location.reload() // todo
-					}
-				})
-			}
-		})
+				if (taskObjName === taskName) {
+					const task = taskObj[taskName] // e.g [ { "subTask": "pull ups", "mode": "week", "week": [], "month": [], "type": "text" }, { "subTask": "push ups", "mode": "week", "week": [], "month": [], "type": "text" } ]
+
+					task.map((subTaskObj, ind) => {
+						if (subTaskObj.subTask === subTaskName) {
+							task.splice(ind, 1)
+							save("tasks", tasks, setAppState)
+							// window.location.reload() // todo
+						}
+					})
+				}
+			})
 	}
 
 	// ! RENDER
@@ -96,7 +98,7 @@ export default class SubTaskModes extends Component {
 
 				{/* mode: off */}
 				<Mode id={0} on={this.state} setOn={setOn} addCounter={addCounter} text="off" subTaskName={subTaskName} taskName={taskName}>
-					<div>"{subTaskName}" is off</div>
+					<div className="ml">"{subTaskName}" <i>is off</i></div>
 				</Mode>
 
 				{/* mode: week */}
