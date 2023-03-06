@@ -6,18 +6,21 @@ export default class Settings extends Component {
 	deleteTasks = () => {
 		if (window.confirm("Delete all tasks ?")) {
 			localStorage.removeItem("tasks")
+			window.location.reload()
 		}
 	}
 
 	deleteColors = () => {
 		if (window.confirm("Delete all colors ?")) {
 			localStorage.removeItem("colors")
+			window.location.reload()
 		}
 	}
 
 	deleteAll = () => {
 		if (window.confirm("Delete all tasks, sub tasks (in each day) & colors ?")) {
 			localStorage.clear()
+			window.location.reload()
 		}
 	}
 
