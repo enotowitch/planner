@@ -66,6 +66,8 @@ export default class Day extends Component {
 		const { year, monthNum } = this.context
 		const { getWeekDay, setDayState } = this
 
+		const isSubTask = getDay(day, year)
+
 		// ! today
 		const appToday = day + " " + year
 		const regExp = /(?:\s)(\w+\s)(?:0|)(\d+\s\d{4})/
@@ -115,6 +117,8 @@ export default class Day extends Component {
 				</div>
 
 				{dayItems}
+
+				{!isSubTask && <Icon src="addSmall" className="addSmall c m0 mt" onClick={() => document.querySelector(".burger-icon").click()} />}
 
 			</div>
 		)

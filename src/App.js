@@ -31,8 +31,8 @@ class App extends Component {
 		// ! cookies
 		!document.cookie.match(/color memo/) && setCookie("color memo", false)
 		!document.cookie.match(/day hover/) && setCookie("day hover", true)
-		!document.cookie.match(/width/) && setCookie("width", 5)
-		!document.cookie.match(/height/) && setCookie("height", 3)
+		!document.cookie.match(/width/) && setCookie("width", 2)
+		!document.cookie.match(/height/) && setCookie("height", 5)
 		// ? cookies
 		// ! colors
 		if (localStorage.length === 0) {
@@ -49,17 +49,17 @@ class App extends Component {
 			save("tasks",
 				[
 					{
-						exersize:
+						"Task 1":
 							[
-								{ subTask: "pull ups", mode: "off", week: [], month: [], type: "text" },
-								{ subTask: "push ups", mode: "off", week: [], month: [], type: "text" }
+								{ subTask: "sub task 1", mode: "month", week: [], month: [1], type: "text" },
+								{ subTask: "sub task 2", mode: "month", week: [], month: [15], type: "text" }
 							]
 					},
 					{
-						learn:
+						"Task 2":
 							[
-								{ subTask: "js", mode: "off", week: [], month: [], type: "checkbox" },
-								{ subTask: "react", mode: "off", week: [], month: [], type: "checkbox" }
+								{ subTask: "sub task 1", mode: "week", week: ["mon"], month: [], type: "checkbox" },
+								{ subTask: "sub task 2", mode: "week", week: ["fri"], month: [], type: "checkbox" }
 							]
 					}
 				])

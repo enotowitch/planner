@@ -4,6 +4,7 @@ $white: #fff;
 $gray: gray;
 $chosen: pink;
 $brand: #bff2ff;
+$danger: tomato;
 $fontMain: Roboto;
 $fontSecond: Montserrat;
 
@@ -41,6 +42,14 @@ input[type="checkbox"]{
 select {
 border-radius: 4px;
 }
+button{
+	all: unset;
+	border-radius: 20px;
+	padding: 5px 15px;
+	background: whitesmoke;
+	color: $danger;
+	margin: 7px;
+}
 // ? GLOBAL
 
 
@@ -54,6 +63,7 @@ border-radius: 4px;
 	font-family: $fontSecond;
 	font-style: italic;
 	font-weight: 700;
+	font-size: 18px !important;
 	// width: 50%;
 }
 .Input{
@@ -87,7 +97,7 @@ border-radius: 4px;
 		img {
 			position: absolute;
 			left: 8px;
-			top: 16px;
+			top: 13px;
 		}
 	}
 }
@@ -110,6 +120,9 @@ border-radius: 4px;
 		padding-top: 20px;
 		min-height: 100%;
 		width: 100%;
+		.InputsAndColors{
+			max-width: 290px;
+		}
 		// !!
 		input{
 			width: 50%;
@@ -361,6 +374,15 @@ cursor: pointer;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+.fww{
+	flex-wrap: wrap;
+}
+.fdc{
+	flex-direction: column;
+}
+.m0{
+	margin: 0;
 }
 .mt{
 	margin-top: 15px;
