@@ -33,7 +33,8 @@ export default class Day extends Component {
 	state = {
 		color: this.getColorDayAndTask(),
 		optionOn: false,
-		title: this.getWeekDay(this.props.day),
+		title: this.getWeekDay(this.props.day).toUpperCase(),
+		subTaskName: "",
 		place: "", // day || dayItem => where to change day color or dayItem color
 		width: this.props.width,
 		height: this.props.height,
@@ -62,11 +63,9 @@ export default class Day extends Component {
 	render() {
 
 		const { day, subTasks } = this.props // day = e.g "Jan 23"
-		const { color, optionOn, title, place, width, height } = this.state
+		const { color, optionOn, title, subTaskName, place, width, height } = this.state
 		const { year, monthNum } = this.context
 		const { getWeekDay, setDayState } = this
-
-		const isSubTask = getDay(day, year)
 
 		// ! today
 		const appToday = day + " " + year
@@ -102,11 +101,12 @@ export default class Day extends Component {
 			<div className={`Day ${isToday ? "today" : ""}`} style={{ background: color, width: width + "vw", height: height + "vh" }}>
 				<div className="Day__top">
 					<span>{dayNum}</span>
-					<span className="Day__title zi3">{isToday}{!isToday && title}</span>
-
+					
+					<span hidden={`${subTaskName ? "" : "notHidden"}`} className="Day__title zi3">{subTaskName}</span>
+					<span hidden={`${subTaskName ? "hidden" : ""}`} className="Day__title zi3">{isToday}{!isToday && title}</span>
 
 					<>
-						<Mark optionOn={optionOn} className="zi3" setDayState={setDayState} title={weekDay} place="day" />
+						<Mark optionOn={optionOn} className="zi3" setDayState={setDayState} title={isToday || weekDay.toUpperCase()} place="day" />
 
 						{optionOn &&
 							<div className="Day__options zi2">
@@ -118,7 +118,7 @@ export default class Day extends Component {
 
 				{dayItems}
 
-				{!isSubTask && <Icon src="addSmall" className="addSmall c m0 mt" onClick={() => document.querySelector(".burger-icon").click()} />}
+				<Icon src="addSmall" className="addSmall m0 mt" onClick={() => document.querySelector(".burger-icon").click()} />
 
 			</div>
 		)

@@ -23,8 +23,8 @@ export default class OnOff extends Component {
 		const { text } = this.props
 
 		return (
-			<div className="fcc mt mb" onClick={this.toggle}>
-				<span className="mr">{text}</span>
+			<div className="fcc mb mt2" onClick={this.toggle}>
+				<span className="OnOff__text mr">{text}</span>
 				<div className="OnOff">
 					{!on && <span style={{ background: "#E9E4D4", left: 0 }}></span>}
 					{on && <span style={{ background: "pink", right: 0 }}></span>}

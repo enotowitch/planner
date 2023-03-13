@@ -5,7 +5,7 @@ export default class Mark extends Component {
 
 	markFn = () => {
 		this.props.setDayState("optionOn", !this.props.optionOn)
-		this.props.setDayState("title", this.props.title)
+		this.props.setDayState("subTaskName", this.props.title)
 		this.props.setDayState("place", this.props.place)
 	}
 

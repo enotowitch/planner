@@ -30,7 +30,9 @@ export default class Settings extends Component {
 				<OnOff text="color memo" />
 				<OnOff text="day hover" />
 
-				<div className="fcc fdc">
+				<div className="rhr mt2 c"></div>
+
+				<div className="buttons__delete">
 					<button onClick={this.deleteTasks}>delete tasks</button>
 					<button onClick={this.deleteColors}>delete colors</button>
 					<button onClick={this.deleteAll}>delete all</button>

@@ -35,8 +35,8 @@ export default class SubTaskType extends Component {
 
 		return (
 			<>
-				<Icon src="typeText" onClick={() => this.setSubTaskType("text")} className={type === "text" && "chosen"} />
-				<Icon src="typeCheckbox" onClick={() => this.setSubTaskType("checkbox")} className={type === "checkbox" && "chosen"} />
+				<Icon src="typeText" onClick={() => this.setSubTaskType("text")} className={`stType ${type === "text" && "chosen"}`} />
+				<Icon src="typeCheckbox" onClick={() => this.setSubTaskType("checkbox")} className={`stType ${type === "checkbox" && "chosen"}`} />
 			</>
 		)
 	}

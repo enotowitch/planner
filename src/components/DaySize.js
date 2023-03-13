@@ -43,7 +43,7 @@ export default class DaySize extends Component {
 
 		// ! RETURN
 		return (
-			<div className="f mt2 mb">
+			<div className="widthHeight c">
 				<label className="fcc">
 					<img className="ml mr" src={widthImg} />
 					<select

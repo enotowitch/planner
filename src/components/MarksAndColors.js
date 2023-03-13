@@ -21,7 +21,7 @@ export default class MarksAndColors extends Component {
 			<>
 				<InputsAndColors />
 
-				<Icon src="add" onClick={this.addColor} className="c mt" />
+				<Icon src="add" onClick={this.addColor} className="mt" />
 			</>
 		)
 	}

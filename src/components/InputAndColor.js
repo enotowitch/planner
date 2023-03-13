@@ -29,7 +29,7 @@ export default class InputAndColor extends Component {
 				<Input role="color" type="text" id={id} colorName={colorName} color={color} className="Input" readOnly={readOnly} day={day} setDayState={setDayState} place={place} />
 				<Input role="color" type="color" id={id} colorName={colorName} color={color} className="Input_color" readOnly={readOnly} day={day} setDayState={setDayState} place={place} />
 				{/* can delete only in Menu */}
-				{!readOnly && <Icon src="close" onClick={(e) => this.deleteColor(e)} className="ml" />}
+				{!readOnly && <Icon src="close" onClick={(e) => this.deleteColor(e)} className="delC ml" />}
 			</div>
 		)
 	}

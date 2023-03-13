@@ -38,7 +38,7 @@ class App extends Component {
 		if (localStorage.length === 0) {
 			save("colors",
 				[
-					{ id: -1, colorName: "no mark", color: "transparent" },
+					{ id: -1, colorName: "no mark", color: "#ffffff" },
 					{ id: 0, colorName: "success", color: "#87d20c" },
 					{ id: 1, colorName: "so-so", color: "#ffd561" },
 					{ id: 2, colorName: "fail", color: "#ff8c92" },
