@@ -6,6 +6,7 @@ import { Context } from "./context"
 import lsData from "./lsData"
 import save from "./functions/save"
 import setCookie from "./functions/setCookie";
+import Scroll from "./components/Scroll";
 
 class App extends Component {
 
@@ -81,11 +82,13 @@ class App extends Component {
 
 				<div onClick={() => this.setState(prev => ({ taskAndMonthOn: !prev.taskAndMonthOn, menuOn: !prev.menuOn }))}>
 					<Burger />
-				</div >
+				</div>
 
 				<TaskAndMonth />
 
 				<Menu />
+
+				<Scroll />
 			</Context.Provider >
 		);
 	}

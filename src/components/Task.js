@@ -31,7 +31,7 @@ export default class Task extends Component {
 			tasks.map(taskObj => {
 				const task = taskObj[taskName]
 				task && task.push(
-					{ "subTask": "", "mode": "off", "week": [], "month": [], "type": "text" }
+					{ "subTask": "", "mode": "week", "week": ["mon", "tue", "wed", "thu", "fri", "sat", "sun"], "month": [], "type": "text" }
 				)
 			})
 		}
