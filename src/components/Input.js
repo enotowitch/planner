@@ -14,7 +14,18 @@ export default class Input extends Component {
 		checked: this.props.value
 	}
 
+	resizeTextarea = (e) => {
+		this.props.type === "textarea" && (e.target.style.height = e.target.scrollHeight + "px")
+		// * set caret to the end
+		setTimeout(function () { e.target.selectionStart = e.target.selectionEnd = 10000; }, 0);
+	}
+
+	onFocus = (e) => {
+		this.resizeTextarea(e)
+	}
+
 	onChange = (e) => {
+		this.resizeTextarea(e)
 		// handle input onChange
 		this.setState({ value: e.target.value })
 		this.setState({ checked: e.target.checked })
@@ -46,7 +57,7 @@ export default class Input extends Component {
 		const oldSubTasks = oldDay && oldDay.subTasks
 		const oldSubTask = oldDay && oldDay.subTasks && oldDay.subTasks[subTaskName]
 		// ! type text
-		if (type === "text" && role === "subTask") {
+		if (type === "textarea" && role === "subTask") {
 			save(`${day} ${year}`, { ...oldDay, day, year, subTasks: { ...oldSubTasks, [subTaskName]: { ...oldSubTask, text: value } } })
 		}
 		// ? type text
@@ -148,7 +159,7 @@ export default class Input extends Component {
 		return (
 			<>
 				{/* type text & color */}
-				{type !== "checkbox" &&
+				{type !== "checkbox" && type !== "textarea" &&
 					<input
 						type={type || "text"}
 						className={className || "Input"}
@@ -161,6 +172,22 @@ export default class Input extends Component {
 						role={role}
 						onClick={(e) => readOnly && this.onClick(e)}
 						placeholder={placeholder}
+					/>
+				}
+				{type === "textarea" &&
+					<textarea
+						type={"textarea" || type}
+						className={className || "Input"}
+						value={type === "text" && colorName || type === "color" && color || value}
+						onChange={(e) => this.onChange(e)}
+						readOnly={readOnly}
+						// disabled={type === "color" && readOnly && true}
+						name={colorName || color}
+						id={id}
+						role={role}
+						onClick={(e) => readOnly && this.onClick(e)}
+						placeholder={placeholder}
+						onFocus={this.onFocus}
 					/>
 				}
 				{type === "checkbox" &&

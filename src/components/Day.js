@@ -71,7 +71,7 @@ export default class Day extends Component {
 		const appToday = day + " " + year
 		const regExp = /(?:\s)(\w+\s)(?:0|)(\d+\s\d{4})/
 		const realToday = Date().match(regExp)[1] + Date().match(regExp)[2]
-		const isToday = appToday === realToday && <b><i>today</i></b>
+		const isToday = appToday === realToday && <b><i>TODAY</i></b>
 		// ? today
 
 		// ! weekDay, dayItems, dayNum, monthName
